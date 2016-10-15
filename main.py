@@ -55,47 +55,47 @@ def execute_translation(schema_mode):
         tkMessageBox.showinfo("Info", "Please select AutoFocus3 file")
         return
 
-    i = 0
-    f = open('runtime.txt', 'a')
-    while i < 1:
-        start_time = timeit.default_timer()
+    #i = 0
+    #f = open('runtime.txt', 'a')
+    #while i < 10:
+    #    start_time = timeit.default_timer()
 
-        reset_message()
-        init_pdf_parser()
+    reset_message()
+    init_pdf_parser()
 
-        is_valid = parse_af3_file(schema_mode)
+    is_valid = parse_af3_file(schema_mode)
 
-        if is_valid is False:
-            if schema_mode == 1:
-                message_english.set('Failed!')
-            elif schema_mode == 2:
-                message_ace.set('Failed!')
-            else:
-                message_english_id.set('Failed!')
-            return
-
+    if is_valid is False:
         if schema_mode == 1:
-            message_english.set('Done!')
+            message_english.set('Failed!')
         elif schema_mode == 2:
-            message_ace.set('Done!')
+            message_ace.set('Failed!')
         else:
-            message_english_id.set('Done!')
+            message_english_id.set('Failed!')
+        return
 
-        exported_file = my_pdf_export_file(file_name.get()[12:], schema_mode)
-        try:
-            os.startfile(exported_file)
-        except AttributeError:
-            subprocess.call(['open', exported_file])
+    if schema_mode == 1:
+        message_english.set('Done!')
+    elif schema_mode == 2:
+        message_ace.set('Done!')
+    else:
+        message_english_id.set('Done!')
 
-        elapsed = timeit.default_timer() - start_time
-        try:
-            f.write(str(elapsed) + '\n')
-        except IOError:
-            f.close()
+    exported_file = my_pdf_export_file(file_name.get()[12:], schema_mode)
+    try:
+        os.startfile(exported_file)
+    except AttributeError:
+        subprocess.call(['open', exported_file])
 
-        i += 1
+     #   elapsed = timeit.default_timer() - start_time
+     #   try:
+     #       f.write(str(elapsed) + '\n')
+     #   except IOError:
+     #       f.close()
 
-    f.close()
+     #   i += 1
+
+    #f.close()
 
 
 def parse_af3_file(translation_schema_mode):
