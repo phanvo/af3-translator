@@ -6,4 +6,5 @@ Python 2.7.x
 
 # Installation
 - Download and install the stable version Python 2.7.x at https://www.python.org/downloads/
-- Run main.py using Python command line
+- Add Python to the environment path in your OS
+- Run main.py using Python command line: ```python main.py```
