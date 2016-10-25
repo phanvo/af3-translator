@@ -1,0 +1,2016 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<org-fortiss-af3-project:FileProject xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:org-fortiss-af3-component="http://www.fortiss.org/af3/component" xmlns:org-fortiss-af3-expression="http://www.fortiss.org/af3/expression" xmlns:org-fortiss-af3-expression-definitions="http://www.fortiss.org/af3/expression/definitions" xmlns:org-fortiss-af3-expression-terms="http://www.fortiss.org/af3/expression/terms" xmlns:org-fortiss-af3-expression-terms-imperative="http://www.fortiss.org/af3/expression/terms/imperative" xmlns:org-fortiss-af3-expression-types="http://www.fortiss.org/af3/expression/types" xmlns:org-fortiss-af3-mira="http://www.fortiss.org/af3/mira" xmlns:org-fortiss-af3-mira-glossary="http://www.fortiss.org/af3/mira/glossary" xmlns:org-fortiss-af3-mira-relations="http://www.fortiss.org/af3/mira/relations" xmlns:org-fortiss-af3-mira-requirementSource="http://www.fortiss.org/af3/mira/requirementSource" xmlns:org-fortiss-af3-mira-usecase="http://www.fortiss.org/af3/mira/usecase" xmlns:org-fortiss-af3-mira-verification="http://www.fortiss.org/af3/mira/verification" xmlns:org-fortiss-af3-msc="http://www.fortiss.org/af3/msc" xmlns:org-fortiss-af3-operatorpanel="http://www.fortiss.org/af3/operatorpanel" xmlns:org-fortiss-af3-project="http://www.fortiss.org/af3/project" xmlns:org-fortiss-af3-project-configuration="http://www.fortiss.org/af3/project/configuration" xmlns:org-fortiss-af3-project-development="http://www.fortiss.org/af3/project/development" xmlns:org-fortiss-af3-project-execution="http://www.fortiss.org/af3/project/execution" xmlns:org-fortiss-af3-safety-annotation="http://www.fortiss.org/af3/safety/annotation" xmlns:org-fortiss-af3-state="http://www.fortiss.org/af3/state" xmlns:org-fortiss-tooling-base-model-layout="http://www.fortiss.org/tooling/base/model/layout" xmi:id="0" name="SimpleTrafficLightsExample">
+  <rootElements xsi:type="org-fortiss-af3-project:ProjectConfiguration" xmi:id="1" id="1">
+    <configurationElements xsi:type="org-fortiss-af3-project-configuration:TypeSystemConfiguration" xmi:id="2" id="2">
+      <typesystem xsi:type="org-fortiss-af3-expression:MicroTypeSystem"/>
+    </configurationElements>
+    <configurationElements xsi:type="org-fortiss-af3-project-configuration:DevelopmentProcessConfiguration" xmi:id="3" id="3">
+      <development xsi:type="org-fortiss-af3-project-development:DummyDevelopmentProcess"/>
+    </configurationElements>
+  </rootElements>
+  <rootElements xsi:type="org-fortiss-af3-expression:DataDictionary" xmi:id="4" id="4" name="Data Dictionary">
+    <typeDefinitions xsi:type="org-fortiss-af3-expression-definitions:Enumeration" xmi:id="5" id="5" name="TrafficColor">
+      <members xmi:id="6" id="6" name="Green"/>
+      <members xmi:id="7" id="7" name="Red"/>
+      <members xmi:id="8" id="8" name="RedYellow"/>
+      <members xmi:id="9" id="9" name="Yellow"/>
+    </typeDefinitions>
+    <typeDefinitions xsi:type="org-fortiss-af3-expression-definitions:Enumeration" xmi:id="10" id="10" name="IndicatorSignal">
+      <members xmi:id="11" id="11" name="Off"/>
+      <members xmi:id="12" id="12" name="On"/>
+    </typeDefinitions>
+    <typeDefinitions xsi:type="org-fortiss-af3-expression-definitions:Enumeration" xmi:id="13" id="13" name="PedestrianColor">
+      <members xmi:id="14" id="14" name="Stop"/>
+      <members xmi:id="15" id="15" name="Walk"/>
+    </typeDefinitions>
+    <typeDefinitions xsi:type="org-fortiss-af3-expression-definitions:Enumeration" xmi:id="16" id="16" name="Signal">
+      <members xmi:id="17" id="17" name="Present"/>
+    </typeDefinitions>
+    <functions xmi:id="18" id="18">
+      <function xmi:id="19" id="19" name="tGreen"/>
+      <definition>
+        <statements xsi:type="org-fortiss-af3-expression-terms-imperative:Return">
+          <value xsi:type="org-fortiss-af3-expression-terms:IntConst" value="2"/>
+        </statements>
+      </definition>
+      <returnType xsi:type="org-fortiss-af3-expression-types:TInt"/>
+    </functions>
+    <functions xmi:id="20" id="20">
+      <function xmi:id="21" id="21" name="tRed"/>
+      <definition>
+        <statements xsi:type="org-fortiss-af3-expression-terms-imperative:Return">
+          <value xsi:type="org-fortiss-af3-expression-terms:IntConst" value="5"/>
+        </statements>
+      </definition>
+      <returnType xsi:type="org-fortiss-af3-expression-types:TInt"/>
+    </functions>
+    <functions xmi:id="22" id="22">
+      <function xmi:id="23" id="23" name="tYellow"/>
+      <definition>
+        <statements xsi:type="org-fortiss-af3-expression-terms-imperative:Return">
+          <value xsi:type="org-fortiss-af3-expression-terms:IntConst" value="1"/>
+        </statements>
+      </definition>
+      <returnType xsi:type="org-fortiss-af3-expression-types:TInt"/>
+    </functions>
+  </rootElements>
+  <rootElements xsi:type="org-fortiss-af3-component:ComponentArchitecture" xmi:id="24" id="24" name="TL-Component-Architecture">
+    <containedElements xsi:type="org-fortiss-af3-component:Component" xmi:id="25" id="25" name="TL-Architecture" comment="">
+      <containedElements xsi:type="org-fortiss-af3-component:Component" xmi:id="26" id="26" name="Merge" comment="">
+        <specifications xsi:type="org-fortiss-af3-component:CausalityComponentSpecification" xmi:id="27" id="27"/>
+        <specifications xsi:type="org-fortiss-af3-component:VerifBehaviourComponentSpecification" xmi:id="28" id="28"/>
+        <specifications xsi:type="org-fortiss-af3-state:StateAutomaton" xmi:id="29" id="29">
+          <containedElements xsi:type="org-fortiss-af3-state:State" xmi:id="30" id="30" name="RootState" comment="">
+            <containedElements xsi:type="org-fortiss-af3-state:State" xmi:id="31" id="31" name="Merge" comment="">
+              <specifications xsi:type="org-fortiss-af3-state:StateSpecification" xmi:id="32" id="32" initial="true">
+                <idleTransitionsSpecifications xmi:id="33" id="33"/>
+              </specifications>
+              <connectors xsi:type="org-fortiss-af3-state:TransitionSegmentExitConnector" xmi:id="34" id="34" name="Source" comment="" outgoing="42">
+                <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos"/>
+                <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="108" height="72"/>
+                <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="cpos"/>
+                <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="cdim" width="0" height="0"/>
+                <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Angle" key="cangle" angle="1.0471975511965976"/>
+              </connectors>
+              <connectors xsi:type="org-fortiss-af3-state:TransitionSegmentEntryConnector" xmi:id="35" id="35" name="Target" comment="" incoming="42">
+                <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos"/>
+                <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="108" height="72"/>
+                <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="cpos"/>
+                <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="cdim" width="0" height="0"/>
+                <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Angle" key="cangle" angle="2.0943951023931953"/>
+              </connectors>
+              <connectors xsi:type="org-fortiss-af3-state:TransitionSegmentExitConnector" xmi:id="36" id="36" name="Source" comment="" outgoing="47">
+                <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos"/>
+                <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="108" height="72"/>
+                <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="cpos"/>
+                <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="cdim" width="0" height="0"/>
+                <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Angle" key="cangle" angle="4.1887902047863905"/>
+              </connectors>
+              <connectors xsi:type="org-fortiss-af3-state:TransitionSegmentEntryConnector" xmi:id="37" id="37" name="Target" comment="" incoming="47">
+                <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos"/>
+                <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="108" height="72"/>
+                <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="cpos"/>
+                <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="cdim" width="0" height="0"/>
+                <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Angle" key="cangle" angle="5.235987755982989"/>
+              </connectors>
+              <connectors xsi:type="org-fortiss-af3-state:TransitionSegmentExitConnector" xmi:id="38" id="38" name="Source" comment="" outgoing="52">
+                <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos"/>
+                <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="108" height="72"/>
+                <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="cpos"/>
+                <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="cdim" width="0" height="0"/>
+                <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Angle" key="cangle" angle="0.3490658503988659"/>
+              </connectors>
+              <connectors xsi:type="org-fortiss-af3-state:TransitionSegmentEntryConnector" xmi:id="39" id="39" name="Target" comment="" incoming="52">
+                <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos"/>
+                <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="108" height="72"/>
+                <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="cpos"/>
+                <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="cdim" width="0" height="0"/>
+                <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Angle" key="cangle" angle="5.934119456780721"/>
+              </connectors>
+              <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos" x="80" y="120"/>
+              <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="162" height="86"/>
+            </containedElements>
+            <specifications xsi:type="org-fortiss-af3-state:StateSpecification" xmi:id="40" id="40">
+              <idleTransitionsSpecifications xmi:id="41" id="41"/>
+            </specifications>
+            <connections xsi:type="org-fortiss-af3-state:TransitionSegment" xmi:id="42" id="42" name="forwardA" comment="" source="34" target="35">
+              <specifications xsi:type="org-fortiss-af3-state:TransitionSegmentSpecification" xmi:id="43" id="43">
+                <guard>
+                  <expression xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                    <function xsi:type="org-fortiss-af3-expression-terms:PredefinedFunction" operator="And"/>
+                    <arguments xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                      <function xsi:type="org-fortiss-af3-expression-terms:PredefinedFunction" operator="Equal"/>
+                      <arguments xsi:type="org-fortiss-af3-expression-terms:Var" identifier="mergeInButtonA"/>
+                      <arguments xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                        <function xsi:type="org-fortiss-af3-expression-terms:UserdefinedFunction" xmi:id="44" id="44" name="Present"/>
+                      </arguments>
+                    </arguments>
+                    <arguments xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                      <function xsi:type="org-fortiss-af3-expression-terms:PredefinedFunction" operator="NotEqual"/>
+                      <arguments xsi:type="org-fortiss-af3-expression-terms:Var" identifier="mergeInButtonB"/>
+                      <arguments xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                        <function xsi:type="org-fortiss-af3-expression-terms:UserdefinedFunction" xmi:id="45" id="45" name="Present"/>
+                      </arguments>
+                    </arguments>
+                  </expression>
+                </guard>
+                <actions>
+                  <variable identifier="mergeOutRequest"/>
+                  <value xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                    <function xsi:type="org-fortiss-af3-expression-terms:UserdefinedFunction" xmi:id="46" id="46" name="Present"/>
+                  </value>
+                </actions>
+              </specifications>
+              <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Points" key="points">
+                <points x="160" y="260"/>
+              </layoutData>
+            </connections>
+            <connections xsi:type="org-fortiss-af3-state:TransitionSegment" xmi:id="47" id="47" name="forwardB" comment="" source="36" target="37">
+              <specifications xsi:type="org-fortiss-af3-state:TransitionSegmentSpecification" xmi:id="48" id="48">
+                <guard>
+                  <expression xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                    <function xsi:type="org-fortiss-af3-expression-terms:PredefinedFunction" operator="And"/>
+                    <arguments xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                      <function xsi:type="org-fortiss-af3-expression-terms:PredefinedFunction" operator="Equal"/>
+                      <arguments xsi:type="org-fortiss-af3-expression-terms:Var" identifier="mergeInButtonB"/>
+                      <arguments xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                        <function xsi:type="org-fortiss-af3-expression-terms:UserdefinedFunction" xmi:id="49" id="49" name="Present"/>
+                      </arguments>
+                    </arguments>
+                    <arguments xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                      <function xsi:type="org-fortiss-af3-expression-terms:PredefinedFunction" operator="NotEqual"/>
+                      <arguments xsi:type="org-fortiss-af3-expression-terms:Var" identifier="mergeInButtonA"/>
+                      <arguments xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                        <function xsi:type="org-fortiss-af3-expression-terms:UserdefinedFunction" xmi:id="50" id="50" name="Present"/>
+                      </arguments>
+                    </arguments>
+                  </expression>
+                </guard>
+                <actions>
+                  <variable identifier="mergeOutRequest"/>
+                  <value xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                    <function xsi:type="org-fortiss-af3-expression-terms:UserdefinedFunction" xmi:id="51" id="51" name="Present"/>
+                  </value>
+                </actions>
+              </specifications>
+              <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Points" key="points">
+                <points x="160" y="70"/>
+              </layoutData>
+            </connections>
+            <connections xsi:type="org-fortiss-af3-state:TransitionSegment" xmi:id="52" id="52" name="forwardBoth" comment="" source="38" target="39">
+              <specifications xsi:type="org-fortiss-af3-state:TransitionSegmentSpecification" xmi:id="53" id="53">
+                <guard>
+                  <expression xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                    <function xsi:type="org-fortiss-af3-expression-terms:PredefinedFunction" operator="And"/>
+                    <arguments xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                      <function xsi:type="org-fortiss-af3-expression-terms:PredefinedFunction" operator="Equal"/>
+                      <arguments xsi:type="org-fortiss-af3-expression-terms:Var" identifier="mergeInButtonB"/>
+                      <arguments xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                        <function xsi:type="org-fortiss-af3-expression-terms:UserdefinedFunction" xmi:id="54" id="54" name="Present"/>
+                      </arguments>
+                    </arguments>
+                    <arguments xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                      <function xsi:type="org-fortiss-af3-expression-terms:PredefinedFunction" operator="Equal"/>
+                      <arguments xsi:type="org-fortiss-af3-expression-terms:Var" identifier="mergeInButtonA"/>
+                      <arguments xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                        <function xsi:type="org-fortiss-af3-expression-terms:UserdefinedFunction" xmi:id="55" id="55" name="Present"/>
+                      </arguments>
+                    </arguments>
+                  </expression>
+                </guard>
+                <actions>
+                  <variable identifier="mergeOutRequest"/>
+                  <value xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                    <function xsi:type="org-fortiss-af3-expression-terms:UserdefinedFunction" xmi:id="56" id="56" name="Present"/>
+                  </value>
+                </actions>
+              </specifications>
+              <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Points" key="points">
+                <points x="300" y="165"/>
+              </layoutData>
+            </connections>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos"/>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="108" height="72"/>
+          </containedElements>
+        </specifications>
+        <connectors xsi:type="org-fortiss-af3-component:InputPort" xmi:id="57" id="57" name="mergeInButtonA" comment="mergeInButtonA" incoming="194">
+          <specifications xsi:type="org-fortiss-af3-component:PortSpecification" xmi:id="58" id="58">
+            <type xsi:type="org-fortiss-af3-expression-types:TDefinedType" name="Signal" def="16"/>
+            <initialValue xsi:type="org-fortiss-af3-expression-terms:DefinedConst" value="NoVal"/>
+          </specifications>
+          <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos" x="24" y="24"/>
+          <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="108" height="72"/>
+          <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="cpos"/>
+          <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="cdim" width="0" height="0"/>
+          <layoutData xsi:type="org-fortiss-tooling-base-model-layout:OffsetOrientation" key="coffsetorient" offset="24" orientation="WEST"/>
+        </connectors>
+        <connectors xsi:type="org-fortiss-af3-component:InputPort" xmi:id="59" id="59" name="mergeInButtonB" comment="mergeInButtonB" incoming="195">
+          <specifications xsi:type="org-fortiss-af3-component:PortSpecification" xmi:id="60" id="60">
+            <type xsi:type="org-fortiss-af3-expression-types:TDefinedType" name="Signal" def="16"/>
+            <initialValue xsi:type="org-fortiss-af3-expression-terms:DefinedConst" value="NoVal"/>
+          </specifications>
+          <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos" x="24" y="48"/>
+          <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="108" height="72"/>
+          <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="cpos"/>
+          <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="cdim" width="0" height="0"/>
+          <layoutData xsi:type="org-fortiss-tooling-base-model-layout:OffsetOrientation" key="coffsetorient" offset="96" orientation="WEST"/>
+        </connectors>
+        <connectors xsi:type="org-fortiss-af3-component:OutputPort" xmi:id="61" id="61" name="mergeOutRequest" comment="mergeOutRequest" outgoing="196">
+          <specifications xsi:type="org-fortiss-af3-component:PortSpecification" xmi:id="62" id="62">
+            <type xsi:type="org-fortiss-af3-expression-types:TDefinedType" name="Signal" def="16"/>
+            <initialValue xsi:type="org-fortiss-af3-expression-terms:DefinedConst" value="NoVal"/>
+          </specifications>
+          <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos" x="24" y="72"/>
+          <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="108" height="72"/>
+          <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="cpos"/>
+          <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="cdim" width="0" height="0"/>
+          <layoutData xsi:type="org-fortiss-tooling-base-model-layout:OffsetOrientation" key="coffsetorient" offset="24" orientation="EAST"/>
+        </connectors>
+        <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos" x="168" y="24"/>
+        <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="216" height="144"/>
+      </containedElements>
+      <containedElements xsi:type="org-fortiss-af3-component:Component" xmi:id="63" id="63" name="Controller" comment="">
+        <containedElements xsi:type="org-fortiss-af3-component:Component" xmi:id="64" id="64" name="Behavior" comment="">
+          <specifications xsi:type="org-fortiss-af3-component:CausalityComponentSpecification" xmi:id="65" id="65" stronglyCausal="true"/>
+          <specifications xsi:type="org-fortiss-af3-component:VerifBehaviourComponentSpecification" xmi:id="66" id="66"/>
+          <specifications xsi:type="org-fortiss-af3-state:StateAutomaton" xmi:id="67" id="67">
+            <containedElements xsi:type="org-fortiss-af3-state:State" xmi:id="68" id="68" name="RootState" comment="">
+              <containedElements xsi:type="org-fortiss-af3-state:State" xmi:id="69" id="69" name="Init" comment="">
+                <specifications xsi:type="org-fortiss-af3-state:StateSpecification" xmi:id="70" id="70" initial="true">
+                  <idleTransitionsSpecifications xmi:id="71" id="71"/>
+                </specifications>
+                <connectors xsi:type="org-fortiss-af3-state:TransitionSegmentExitConnector" xmi:id="72" id="72" name="Source" comment="" outgoing="110">
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="108" height="72"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="cpos"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="cdim" width="0" height="0"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Angle" key="cangle" angle="-0.3490658503988659"/>
+                </connectors>
+                <connectors xsi:type="org-fortiss-af3-state:TransitionSegmentExitConnector" xmi:id="73" id="73" name="Source" comment="" outgoing="115">
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="108" height="72"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="cpos"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="cdim" width="0" height="0"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Angle" key="cangle" angle="0.5235987755982988"/>
+                </connectors>
+                <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos" x="80" y="80"/>
+                <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="108" height="72"/>
+              </containedElements>
+              <containedElements xsi:type="org-fortiss-af3-state:State" xmi:id="74" id="74" name="Green" comment="">
+                <specifications xsi:type="org-fortiss-af3-state:StateSpecification" xmi:id="75" id="75">
+                  <idleTransitionsSpecifications xmi:id="76" id="76"/>
+                </specifications>
+                <specifications xsi:type="org-fortiss-af3-mira-usecase:MinimumgaranteeSpecification" xmi:id="77" id="77" reference="247" name="Ref: 1 - Activate pedestrian light" comment=""/>
+                <connectors xsi:type="org-fortiss-af3-state:TransitionSegmentEntryConnector" xmi:id="78" id="78" name="Target" comment="" incoming="110">
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="108" height="72"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="cpos"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="cdim" width="0" height="0"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Angle" key="cangle" angle="3.490658503988659"/>
+                </connectors>
+                <connectors xsi:type="org-fortiss-af3-state:TransitionSegmentEntryConnector" xmi:id="79" id="79" name="Target" comment="" incoming="115">
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="108" height="72"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="cpos"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="cdim" width="0" height="0"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Angle" key="cangle" angle="3.141592653589793"/>
+                </connectors>
+                <connectors xsi:type="org-fortiss-af3-state:TransitionSegmentExitConnector" xmi:id="80" id="80" name="Source" comment="" outgoing="122">
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="108" height="72"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="cpos"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="cdim" width="0" height="0"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Angle" key="cangle" angle="2.792526803190927"/>
+                </connectors>
+                <connectors xsi:type="org-fortiss-af3-state:TransitionSegmentEntryConnector" xmi:id="81" id="81" name="Target" comment="" incoming="140">
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="108" height="72"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="cpos"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="cdim" width="0" height="0"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Angle" key="cangle" angle="0.3490658503988659"/>
+                </connectors>
+                <connectors xsi:type="org-fortiss-af3-state:TransitionSegmentExitConnector" xmi:id="82" id="82" name="Source" comment="" outgoing="145">
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="108" height="72"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="cpos"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="cdim" width="0" height="0"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Angle" key="cangle" angle="1.9198621771937625"/>
+                </connectors>
+                <connectors xsi:type="org-fortiss-af3-state:TransitionSegmentEntryConnector" xmi:id="83" id="83" name="Target" comment="" incoming="145">
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="108" height="72"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="cpos"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="cdim" width="0" height="0"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Angle" key="cangle" angle="1.2217304763960306"/>
+                </connectors>
+                <connectors xsi:type="org-fortiss-af3-state:TransitionSegmentExitConnector" xmi:id="84" id="84" name="Source" comment="" outgoing="152">
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="108" height="72"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="cpos"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="cdim" width="0" height="0"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Angle" key="cangle" angle="5.061454830783556"/>
+                </connectors>
+                <connectors xsi:type="org-fortiss-af3-state:TransitionSegmentEntryConnector" xmi:id="85" id="85" name="Target" comment="" incoming="152">
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="108" height="72"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="cpos"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="cdim" width="0" height="0"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Angle" key="cangle" angle="4.363323129985824"/>
+                </connectors>
+                <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos" x="400" y="100"/>
+                <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="129" height="93"/>
+              </containedElements>
+              <containedElements xsi:type="org-fortiss-af3-state:State" xmi:id="86" id="86" name="RedYellow" comment="">
+                <specifications xsi:type="org-fortiss-af3-state:StateSpecification" xmi:id="87" id="87">
+                  <idleTransitionsSpecifications xmi:id="88" id="88"/>
+                </specifications>
+                <connectors xsi:type="org-fortiss-af3-state:TransitionSegmentEntryConnector" xmi:id="89" id="89" name="Target" comment="" incoming="134">
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="108" height="72"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="cpos"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="cdim" width="0" height="0"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Angle" key="cangle" angle="1.9198621771937625"/>
+                </connectors>
+                <connectors xsi:type="org-fortiss-af3-state:TransitionSegmentExitConnector" xmi:id="90" id="90" name="Source" comment="" outgoing="140">
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="108" height="72"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="cpos"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="cdim" width="0" height="0"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Angle" key="cangle" angle="4.363323129985824"/>
+                </connectors>
+                <connectors xsi:type="org-fortiss-af3-state:TransitionSegmentExitConnector" xmi:id="91" id="91" name="Source" comment="" outgoing="158">
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="108" height="72"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="cpos"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="cdim" width="0" height="0"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Angle" key="cangle" angle="0.3490658503988659"/>
+                </connectors>
+                <connectors xsi:type="org-fortiss-af3-state:TransitionSegmentEntryConnector" xmi:id="92" id="92" name="Target" comment="" incoming="158">
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="108" height="72"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="cpos"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="cdim" width="0" height="0"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Angle" key="cangle" angle="-0.3490658503988659"/>
+                </connectors>
+                <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos" x="500" y="300"/>
+                <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="172" height="100"/>
+              </containedElements>
+              <containedElements xsi:type="org-fortiss-af3-state:State" xmi:id="93" id="93" name="Red" comment="">
+                <specifications xsi:type="org-fortiss-af3-state:StateSpecification" xmi:id="94" id="94">
+                  <idleTransitionsSpecifications xmi:id="95" id="95"/>
+                </specifications>
+                <specifications xsi:type="org-fortiss-af3-mira-usecase:SuccessgaranteeSpecification" xmi:id="96" id="96" reference="247" name="Ref: 1 - Activate pedestrian light" comment=""/>
+                <connectors xsi:type="org-fortiss-af3-state:TransitionSegmentEntryConnector" xmi:id="97" id="97" name="Target" comment="" incoming="128">
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="108" height="72"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="cpos"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="cdim" width="0" height="0"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Angle" key="cangle" angle="3.141592653589793"/>
+                </connectors>
+                <connectors xsi:type="org-fortiss-af3-state:TransitionSegmentExitConnector" xmi:id="98" id="98" name="Source" comment="" outgoing="134">
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="108" height="72"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="cpos"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="cdim" width="0" height="0"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Angle" key="cangle" angle="5.934119456780721"/>
+                </connectors>
+                <connectors xsi:type="org-fortiss-af3-state:TransitionSegmentExitConnector" xmi:id="99" id="99" name="Source" comment="" outgoing="156">
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="108" height="72"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="cpos"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="cdim" width="0" height="0"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Angle" key="cangle" angle="4.363323129985824"/>
+                </connectors>
+                <connectors xsi:type="org-fortiss-af3-state:TransitionSegmentEntryConnector" xmi:id="100" id="100" name="Target" comment="" incoming="156">
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="108" height="72"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="cpos"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="cdim" width="0" height="0"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Angle" key="cangle" angle="5.061454830783556"/>
+                </connectors>
+                <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos" x="370" y="450"/>
+                <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="108" height="72"/>
+              </containedElements>
+              <containedElements xsi:type="org-fortiss-af3-state:State" xmi:id="101" id="101" name="Yellow" comment="">
+                <specifications xsi:type="org-fortiss-af3-state:StateSpecification" xmi:id="102" id="102">
+                  <idleTransitionsSpecifications xmi:id="103" id="103"/>
+                </specifications>
+                <connectors xsi:type="org-fortiss-af3-state:TransitionSegmentEntryConnector" xmi:id="104" id="104" name="Target" comment="" incoming="122">
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="108" height="72"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="cpos"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="cdim" width="0" height="0"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Angle" key="cangle" angle="5.061454830783556"/>
+                </connectors>
+                <connectors xsi:type="org-fortiss-af3-state:TransitionSegmentExitConnector" xmi:id="105" id="105" name="Source" comment="" outgoing="128">
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="108" height="72"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="cpos"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="cdim" width="0" height="0"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Angle" key="cangle" angle="1.2217304763960306"/>
+                </connectors>
+                <connectors xsi:type="org-fortiss-af3-state:TransitionSegmentExitConnector" xmi:id="106" id="106" name="Source" comment="" outgoing="154">
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="108" height="72"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="cpos"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="cdim" width="0" height="0"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Angle" key="cangle" angle="-0.3490658503988659"/>
+                </connectors>
+                <connectors xsi:type="org-fortiss-af3-state:TransitionSegmentEntryConnector" xmi:id="107" id="107" name="Target" comment="" incoming="154">
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="108" height="72"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="cpos"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="cdim" width="0" height="0"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Angle" key="cangle" angle="0.3490658503988659"/>
+                </connectors>
+                <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos" x="120" y="300"/>
+                <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="129" height="93"/>
+              </containedElements>
+              <specifications xsi:type="org-fortiss-af3-state:StateSpecification" xmi:id="108" id="108">
+                <idleTransitionsSpecifications xmi:id="109" id="109"/>
+              </specifications>
+              <connections xsi:type="org-fortiss-af3-state:TransitionSegment" xmi:id="110" id="110" name="initializeWithNoVal" comment="" source="72" target="78">
+                <specifications xsi:type="org-fortiss-af3-state:TransitionSegmentSpecification" xmi:id="111" id="111">
+                  <guard>
+                    <expression xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                      <function xsi:type="org-fortiss-af3-expression-terms:PredefinedFunction" operator="And"/>
+                      <arguments xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                        <function xsi:type="org-fortiss-af3-expression-terms:PredefinedFunction" operator="Equal"/>
+                        <arguments xsi:type="org-fortiss-af3-expression-terms:Var" identifier="time"/>
+                        <arguments xsi:type="org-fortiss-af3-expression-terms:IntConst" value="-1"/>
+                      </arguments>
+                      <arguments xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                        <function xsi:type="org-fortiss-af3-expression-terms:PredefinedFunction" operator="Equal"/>
+                        <arguments xsi:type="org-fortiss-af3-expression-terms:Var" identifier="behaviorInRequest"/>
+                        <arguments xsi:type="org-fortiss-af3-expression-terms:DefinedConst" value="NoVal"/>
+                      </arguments>
+                    </expression>
+                  </guard>
+                  <actions>
+                    <variable identifier="behaviorOutTrafficSignal"/>
+                    <value xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                      <function xsi:type="org-fortiss-af3-expression-terms:UserdefinedFunction" xmi:id="112" id="112" name="Green"/>
+                    </value>
+                  </actions>
+                  <actions>
+                    <variable identifier="behaviorOutPedestrianSignal"/>
+                    <value xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                      <function xsi:type="org-fortiss-af3-expression-terms:UserdefinedFunction" xmi:id="113" id="113" name="Stop"/>
+                    </value>
+                  </actions>
+                  <actions>
+                    <variable identifier="behaviorOutIndicatorSignal"/>
+                    <value xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                      <function xsi:type="org-fortiss-af3-expression-terms:UserdefinedFunction" xmi:id="114" id="114" name="Off"/>
+                    </value>
+                  </actions>
+                  <actions>
+                    <variable identifier="time"/>
+                    <value xsi:type="org-fortiss-af3-expression-terms:IntConst" value="-1"/>
+                  </actions>
+                </specifications>
+                <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Points" key="points"/>
+              </connections>
+              <connections xsi:type="org-fortiss-af3-state:TransitionSegment" xmi:id="115" id="115" name="initializeWithPresent" comment="" source="73" target="79">
+                <specifications xsi:type="org-fortiss-af3-state:TransitionSegmentSpecification" xmi:id="116" id="116">
+                  <guard>
+                    <expression xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                      <function xsi:type="org-fortiss-af3-expression-terms:PredefinedFunction" operator="And"/>
+                      <arguments xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                        <function xsi:type="org-fortiss-af3-expression-terms:PredefinedFunction" operator="Equal"/>
+                        <arguments xsi:type="org-fortiss-af3-expression-terms:Var" identifier="time"/>
+                        <arguments xsi:type="org-fortiss-af3-expression-terms:IntConst" value="-1"/>
+                      </arguments>
+                      <arguments xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                        <function xsi:type="org-fortiss-af3-expression-terms:PredefinedFunction" operator="Equal"/>
+                        <arguments xsi:type="org-fortiss-af3-expression-terms:Var" identifier="behaviorInRequest"/>
+                        <arguments xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                          <function xsi:type="org-fortiss-af3-expression-terms:UserdefinedFunction" xmi:id="117" id="117" name="Present"/>
+                        </arguments>
+                      </arguments>
+                    </expression>
+                  </guard>
+                  <actions>
+                    <variable identifier="behaviorOutTrafficSignal"/>
+                    <value xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                      <function xsi:type="org-fortiss-af3-expression-terms:UserdefinedFunction" xmi:id="118" id="118" name="Green"/>
+                    </value>
+                  </actions>
+                  <actions>
+                    <variable identifier="behaviorOutPedestrianSignal"/>
+                    <value xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                      <function xsi:type="org-fortiss-af3-expression-terms:UserdefinedFunction" xmi:id="119" id="119" name="Stop"/>
+                    </value>
+                  </actions>
+                  <actions>
+                    <variable identifier="behaviorOutIndicatorSignal"/>
+                    <value xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                      <function xsi:type="org-fortiss-af3-expression-terms:UserdefinedFunction" xmi:id="120" id="120" name="On"/>
+                    </value>
+                  </actions>
+                  <actions>
+                    <variable identifier="time"/>
+                    <value xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                      <function xsi:type="org-fortiss-af3-expression-terms:UserdefinedFunction" xmi:id="121" id="121" name="tGreen"/>
+                    </value>
+                  </actions>
+                </specifications>
+                <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Points" key="points"/>
+              </connections>
+              <connections xsi:type="org-fortiss-af3-state:TransitionSegment" xmi:id="122" id="122" name="greenToYellow" comment="" source="80" target="104">
+                <specifications xsi:type="org-fortiss-af3-state:TransitionSegmentSpecification" xmi:id="123" id="123">
+                  <guard>
+                    <expression xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                      <function xsi:type="org-fortiss-af3-expression-terms:PredefinedFunction" operator="Equal"/>
+                      <arguments xsi:type="org-fortiss-af3-expression-terms:Var" identifier="time"/>
+                      <arguments xsi:type="org-fortiss-af3-expression-terms:IntConst"/>
+                    </expression>
+                  </guard>
+                  <actions>
+                    <variable identifier="behaviorOutTrafficSignal"/>
+                    <value xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                      <function xsi:type="org-fortiss-af3-expression-terms:UserdefinedFunction" xmi:id="124" id="124" name="Yellow"/>
+                    </value>
+                  </actions>
+                  <actions>
+                    <variable identifier="behaviorOutPedestrianSignal"/>
+                    <value xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                      <function xsi:type="org-fortiss-af3-expression-terms:UserdefinedFunction" xmi:id="125" id="125" name="Stop"/>
+                    </value>
+                  </actions>
+                  <actions>
+                    <variable identifier="behaviorOutIndicatorSignal"/>
+                    <value xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                      <function xsi:type="org-fortiss-af3-expression-terms:UserdefinedFunction" xmi:id="126" id="126" name="On"/>
+                    </value>
+                  </actions>
+                  <actions>
+                    <variable identifier="time"/>
+                    <value xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                      <function xsi:type="org-fortiss-af3-expression-terms:UserdefinedFunction" xmi:id="127" id="127" name="tYellow"/>
+                    </value>
+                  </actions>
+                </specifications>
+                <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Points" key="points"/>
+              </connections>
+              <connections xsi:type="org-fortiss-af3-state:TransitionSegment" xmi:id="128" id="128" name="yellowToRed" comment="" source="105" target="97">
+                <specifications xsi:type="org-fortiss-af3-state:TransitionSegmentSpecification" xmi:id="129" id="129">
+                  <guard>
+                    <expression xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                      <function xsi:type="org-fortiss-af3-expression-terms:PredefinedFunction" operator="Equal"/>
+                      <arguments xsi:type="org-fortiss-af3-expression-terms:Var" identifier="time"/>
+                      <arguments xsi:type="org-fortiss-af3-expression-terms:IntConst"/>
+                    </expression>
+                  </guard>
+                  <actions>
+                    <variable identifier="behaviorOutTrafficSignal"/>
+                    <value xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                      <function xsi:type="org-fortiss-af3-expression-terms:UserdefinedFunction" xmi:id="130" id="130" name="Red"/>
+                    </value>
+                  </actions>
+                  <actions>
+                    <variable identifier="behaviorOutPedestrianSignal"/>
+                    <value xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                      <function xsi:type="org-fortiss-af3-expression-terms:UserdefinedFunction" xmi:id="131" id="131" name="Walk"/>
+                    </value>
+                  </actions>
+                  <actions>
+                    <variable identifier="behaviorOutIndicatorSignal"/>
+                    <value xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                      <function xsi:type="org-fortiss-af3-expression-terms:UserdefinedFunction" xmi:id="132" id="132" name="Off"/>
+                    </value>
+                  </actions>
+                  <actions>
+                    <variable identifier="time"/>
+                    <value xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                      <function xsi:type="org-fortiss-af3-expression-terms:UserdefinedFunction" xmi:id="133" id="133" name="tRed"/>
+                    </value>
+                  </actions>
+                </specifications>
+                <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Points" key="points"/>
+              </connections>
+              <connections xsi:type="org-fortiss-af3-state:TransitionSegment" xmi:id="134" id="134" name="redToRedyellow" comment="" source="98" target="89">
+                <specifications xsi:type="org-fortiss-af3-state:TransitionSegmentSpecification" xmi:id="135" id="135">
+                  <guard>
+                    <expression xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                      <function xsi:type="org-fortiss-af3-expression-terms:PredefinedFunction" operator="Equal"/>
+                      <arguments xsi:type="org-fortiss-af3-expression-terms:Var" identifier="time"/>
+                      <arguments xsi:type="org-fortiss-af3-expression-terms:IntConst"/>
+                    </expression>
+                  </guard>
+                  <actions>
+                    <variable identifier="behaviorOutTrafficSignal"/>
+                    <value xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                      <function xsi:type="org-fortiss-af3-expression-terms:UserdefinedFunction" xmi:id="136" id="136" name="RedYellow"/>
+                    </value>
+                  </actions>
+                  <actions>
+                    <variable identifier="behaviorOutPedestrianSignal"/>
+                    <value xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                      <function xsi:type="org-fortiss-af3-expression-terms:UserdefinedFunction" xmi:id="137" id="137" name="Stop"/>
+                    </value>
+                  </actions>
+                  <actions>
+                    <variable identifier="behaviorOutIndicatorSignal"/>
+                    <value xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                      <function xsi:type="org-fortiss-af3-expression-terms:UserdefinedFunction" xmi:id="138" id="138" name="Off"/>
+                    </value>
+                  </actions>
+                  <actions>
+                    <variable identifier="time"/>
+                    <value xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                      <function xsi:type="org-fortiss-af3-expression-terms:UserdefinedFunction" xmi:id="139" id="139" name="tYellow"/>
+                    </value>
+                  </actions>
+                </specifications>
+                <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Points" key="points"/>
+              </connections>
+              <connections xsi:type="org-fortiss-af3-state:TransitionSegment" xmi:id="140" id="140" name="redyellowToGreen" comment="" source="90" target="81">
+                <specifications xsi:type="org-fortiss-af3-state:TransitionSegmentSpecification" xmi:id="141" id="141">
+                  <guard>
+                    <expression xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                      <function xsi:type="org-fortiss-af3-expression-terms:PredefinedFunction" operator="Equal"/>
+                      <arguments xsi:type="org-fortiss-af3-expression-terms:Var" identifier="time"/>
+                      <arguments xsi:type="org-fortiss-af3-expression-terms:IntConst"/>
+                    </expression>
+                  </guard>
+                  <actions>
+                    <variable identifier="behaviorOutTrafficSignal"/>
+                    <value xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                      <function xsi:type="org-fortiss-af3-expression-terms:UserdefinedFunction" xmi:id="142" id="142" name="Green"/>
+                    </value>
+                  </actions>
+                  <actions>
+                    <variable identifier="behaviorOutPedestrianSignal"/>
+                    <value xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                      <function xsi:type="org-fortiss-af3-expression-terms:UserdefinedFunction" xmi:id="143" id="143" name="Stop"/>
+                    </value>
+                  </actions>
+                  <actions>
+                    <variable identifier="behaviorOutIndicatorSignal"/>
+                    <value xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                      <function xsi:type="org-fortiss-af3-expression-terms:UserdefinedFunction" xmi:id="144" id="144" name="Off"/>
+                    </value>
+                  </actions>
+                  <actions>
+                    <variable identifier="time"/>
+                    <value xsi:type="org-fortiss-af3-expression-terms:IntConst" value="-1"/>
+                  </actions>
+                </specifications>
+                <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Points" key="points"/>
+              </connections>
+              <connections xsi:type="org-fortiss-af3-state:TransitionSegment" xmi:id="145" id="145" name="receive" comment="" source="82" target="83">
+                <specifications xsi:type="org-fortiss-af3-state:TransitionSegmentSpecification" xmi:id="146" id="146">
+                  <guard>
+                    <expression xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                      <function xsi:type="org-fortiss-af3-expression-terms:PredefinedFunction" operator="And"/>
+                      <arguments xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                        <function xsi:type="org-fortiss-af3-expression-terms:PredefinedFunction" operator="Equal"/>
+                        <arguments xsi:type="org-fortiss-af3-expression-terms:Var" identifier="time"/>
+                        <arguments xsi:type="org-fortiss-af3-expression-terms:IntConst" value="-1"/>
+                      </arguments>
+                      <arguments xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                        <function xsi:type="org-fortiss-af3-expression-terms:PredefinedFunction" operator="Equal"/>
+                        <arguments xsi:type="org-fortiss-af3-expression-terms:Var" identifier="behaviorInRequest"/>
+                        <arguments xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                          <function xsi:type="org-fortiss-af3-expression-terms:UserdefinedFunction" xmi:id="147" id="147" name="Present"/>
+                        </arguments>
+                      </arguments>
+                    </expression>
+                  </guard>
+                  <actions>
+                    <variable identifier="behaviorOutTrafficSignal"/>
+                    <value xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                      <function xsi:type="org-fortiss-af3-expression-terms:UserdefinedFunction" xmi:id="148" id="148" name="Green"/>
+                    </value>
+                  </actions>
+                  <actions>
+                    <variable identifier="behaviorOutPedestrianSignal"/>
+                    <value xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                      <function xsi:type="org-fortiss-af3-expression-terms:UserdefinedFunction" xmi:id="149" id="149" name="Stop"/>
+                    </value>
+                  </actions>
+                  <actions>
+                    <variable identifier="behaviorOutIndicatorSignal"/>
+                    <value xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                      <function xsi:type="org-fortiss-af3-expression-terms:UserdefinedFunction" xmi:id="150" id="150" name="On"/>
+                    </value>
+                  </actions>
+                  <actions>
+                    <variable identifier="time"/>
+                    <value xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                      <function xsi:type="org-fortiss-af3-expression-terms:UserdefinedFunction" xmi:id="151" id="151" name="tGreen"/>
+                    </value>
+                  </actions>
+                </specifications>
+                <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Points" key="points">
+                  <points x="456" y="216"/>
+                </layoutData>
+              </connections>
+              <connections xsi:type="org-fortiss-af3-state:TransitionSegment" xmi:id="152" id="152" name="countdown" comment="" source="84" target="85">
+                <specifications xsi:type="org-fortiss-af3-state:TransitionSegmentSpecification" xmi:id="153" id="153">
+                  <guard>
+                    <expression xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                      <function xsi:type="org-fortiss-af3-expression-terms:PredefinedFunction" operator="GreaterThan"/>
+                      <arguments xsi:type="org-fortiss-af3-expression-terms:Var" identifier="time"/>
+                      <arguments xsi:type="org-fortiss-af3-expression-terms:IntConst"/>
+                    </expression>
+                  </guard>
+                  <actions>
+                    <variable identifier="time"/>
+                    <value xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                      <function xsi:type="org-fortiss-af3-expression-terms:PredefinedFunction" operator="Subtract"/>
+                      <arguments xsi:type="org-fortiss-af3-expression-terms:Var" identifier="time"/>
+                      <arguments xsi:type="org-fortiss-af3-expression-terms:IntConst" value="1"/>
+                    </value>
+                  </actions>
+                </specifications>
+                <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Points" key="points">
+                  <points x="456" y="72"/>
+                </layoutData>
+              </connections>
+              <connections xsi:type="org-fortiss-af3-state:TransitionSegment" xmi:id="154" id="154" name="countdown" comment="" source="106" target="107">
+                <specifications xsi:type="org-fortiss-af3-state:TransitionSegmentSpecification" xmi:id="155" id="155">
+                  <guard>
+                    <expression xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                      <function xsi:type="org-fortiss-af3-expression-terms:PredefinedFunction" operator="GreaterThan"/>
+                      <arguments xsi:type="org-fortiss-af3-expression-terms:Var" identifier="time"/>
+                      <arguments xsi:type="org-fortiss-af3-expression-terms:IntConst"/>
+                    </expression>
+                  </guard>
+                  <actions>
+                    <variable identifier="time"/>
+                    <value xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                      <function xsi:type="org-fortiss-af3-expression-terms:PredefinedFunction" operator="Subtract"/>
+                      <arguments xsi:type="org-fortiss-af3-expression-terms:Var" identifier="time"/>
+                      <arguments xsi:type="org-fortiss-af3-expression-terms:IntConst" value="1"/>
+                    </value>
+                  </actions>
+                </specifications>
+                <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Points" key="points">
+                  <points x="276" y="348"/>
+                </layoutData>
+              </connections>
+              <connections xsi:type="org-fortiss-af3-state:TransitionSegment" xmi:id="156" id="156" name="countdown" comment="" source="99" target="100">
+                <specifications xsi:type="org-fortiss-af3-state:TransitionSegmentSpecification" xmi:id="157" id="157">
+                  <guard>
+                    <expression xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                      <function xsi:type="org-fortiss-af3-expression-terms:PredefinedFunction" operator="GreaterThan"/>
+                      <arguments xsi:type="org-fortiss-af3-expression-terms:Var" identifier="time"/>
+                      <arguments xsi:type="org-fortiss-af3-expression-terms:IntConst"/>
+                    </expression>
+                  </guard>
+                  <actions>
+                    <variable identifier="time"/>
+                    <value xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                      <function xsi:type="org-fortiss-af3-expression-terms:PredefinedFunction" operator="Subtract"/>
+                      <arguments xsi:type="org-fortiss-af3-expression-terms:Var" identifier="time"/>
+                      <arguments xsi:type="org-fortiss-af3-expression-terms:IntConst" value="1"/>
+                    </value>
+                  </actions>
+                </specifications>
+                <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Points" key="points">
+                  <points x="420" y="420"/>
+                </layoutData>
+              </connections>
+              <connections xsi:type="org-fortiss-af3-state:TransitionSegment" xmi:id="158" id="158" name="countdown" comment="" source="91" target="92">
+                <specifications xsi:type="org-fortiss-af3-state:TransitionSegmentSpecification" xmi:id="159" id="159">
+                  <guard>
+                    <expression xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                      <function xsi:type="org-fortiss-af3-expression-terms:PredefinedFunction" operator="GreaterThan"/>
+                      <arguments xsi:type="org-fortiss-af3-expression-terms:Var" identifier="time"/>
+                      <arguments xsi:type="org-fortiss-af3-expression-terms:IntConst"/>
+                    </expression>
+                  </guard>
+                  <actions>
+                    <variable identifier="time"/>
+                    <value xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                      <function xsi:type="org-fortiss-af3-expression-terms:PredefinedFunction" operator="Subtract"/>
+                      <arguments xsi:type="org-fortiss-af3-expression-terms:Var" identifier="time"/>
+                      <arguments xsi:type="org-fortiss-af3-expression-terms:IntConst" value="1"/>
+                    </value>
+                  </actions>
+                </specifications>
+                <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Points" key="points">
+                  <points x="696" y="348"/>
+                </layoutData>
+              </connections>
+              <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos"/>
+              <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="108" height="72"/>
+            </containedElements>
+            <dataStateVariables xmi:id="160" id="160">
+              <variable identifier="time"/>
+              <initialValue xsi:type="org-fortiss-af3-expression-terms:IntConst" value="-1"/>
+              <type xsi:type="org-fortiss-af3-expression-types:TInt"/>
+            </dataStateVariables>
+          </specifications>
+          <specifications xsi:type="org-fortiss-af3-mira-usecase:ScopeSpecification" xmi:id="161" id="161" reference="247" name="Ref: 1 - Activate pedestrian light" comment=""/>
+          <connectors xsi:type="org-fortiss-af3-component:InputPort" xmi:id="162" id="162" name="behaviorInRequest" comment="behaviorInRequest" incoming="177">
+            <specifications xsi:type="org-fortiss-af3-component:PortSpecification" xmi:id="163" id="163">
+              <type xsi:type="org-fortiss-af3-expression-types:TDefinedType" name="Signal" def="16"/>
+              <initialValue xsi:type="org-fortiss-af3-expression-terms:DefinedConst" value="NoVal"/>
+            </specifications>
+            <specifications xsi:type="org-fortiss-af3-mira-usecase:TriggerSpecification" xmi:id="164" id="164" reference="247" name="Ref: 1 - Activate pedestrian light" comment=""/>
+            <specifications xsi:type="org-fortiss-af3-mira-usecase:InputSpecification" xmi:id="165" id="165" reference="247" name="Ref: 1 - Activate pedestrian light" comment=""/>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos" x="24" y="24"/>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="108" height="72"/>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="cpos"/>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="cdim" width="0" height="0"/>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:OffsetOrientation" key="coffsetorient" offset="24" orientation="WEST"/>
+          </connectors>
+          <connectors xsi:type="org-fortiss-af3-component:OutputPort" xmi:id="166" id="166" name="behaviorOutTrafficSignal" comment="behaviorOutTrafficSignal" outgoing="178">
+            <specifications xsi:type="org-fortiss-af3-component:PortSpecification" xmi:id="167" id="167">
+              <type xsi:type="org-fortiss-af3-expression-types:TDefinedType" name="TrafficColor" def="5"/>
+              <initialValue xsi:type="org-fortiss-af3-expression-terms:DefinedConst" value="NoVal"/>
+            </specifications>
+            <specifications xsi:type="org-fortiss-af3-mira-usecase:OutputSpecification" xmi:id="168" id="168" reference="247" name="Ref: 1 - Activate pedestrian light" comment=""/>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos" x="24" y="48"/>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="108" height="72"/>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="cpos"/>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="cdim" width="0" height="0"/>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:OffsetOrientation" key="coffsetorient" offset="24" orientation="EAST"/>
+          </connectors>
+          <connectors xsi:type="org-fortiss-af3-component:OutputPort" xmi:id="169" id="169" name="behaviorOutPedestrianSignal" comment="behaviorOutPedestrianSignal" outgoing="179">
+            <specifications xsi:type="org-fortiss-af3-component:PortSpecification" xmi:id="170" id="170">
+              <type xsi:type="org-fortiss-af3-expression-types:TDefinedType" name="PedestrianColor" def="13"/>
+              <initialValue xsi:type="org-fortiss-af3-expression-terms:DefinedConst" value="NoVal"/>
+            </specifications>
+            <specifications xsi:type="org-fortiss-af3-mira-usecase:OutputSpecification" xmi:id="171" id="171" reference="247" name="Ref: 1 - Activate pedestrian light" comment=""/>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos" x="24" y="72"/>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="108" height="72"/>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="cpos"/>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="cdim" width="0" height="0"/>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:OffsetOrientation" key="coffsetorient" offset="120" orientation="EAST"/>
+          </connectors>
+          <connectors xsi:type="org-fortiss-af3-component:OutputPort" xmi:id="172" id="172" name="behaviorOutIndicatorSignal" comment="behaviorOutIndicatorSignal" outgoing="180 181">
+            <specifications xsi:type="org-fortiss-af3-component:PortSpecification" xmi:id="173" id="173">
+              <type xsi:type="org-fortiss-af3-expression-types:TDefinedType" name="IndicatorSignal" def="10"/>
+              <initialValue xsi:type="org-fortiss-af3-expression-terms:DefinedConst" value="NoVal"/>
+            </specifications>
+            <specifications xsi:type="org-fortiss-af3-mira-usecase:OutputSpecification" xmi:id="174" id="174" reference="247" name="Ref: 1 - Activate pedestrian light" comment=""/>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos" x="24" y="96"/>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="108" height="72"/>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="cpos"/>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="cdim" width="0" height="0"/>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:OffsetOrientation" key="coffsetorient" offset="264" orientation="EAST"/>
+          </connectors>
+          <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos" x="168" y="24"/>
+          <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="216" height="360"/>
+        </containedElements>
+        <specifications xsi:type="org-fortiss-af3-component:CausalityComponentSpecification" xmi:id="175" id="175"/>
+        <specifications xsi:type="org-fortiss-af3-component:VerifBehaviourComponentSpecification" xmi:id="176" id="176"/>
+        <connections xsi:type="org-fortiss-af3-component:Channel" xmi:id="177" id="177" name="request" comment="request" source="182" target="162">
+          <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Points" key="points"/>
+        </connections>
+        <connections xsi:type="org-fortiss-af3-component:Channel" xmi:id="178" id="178" name="trafficSignal" comment="trafficSignal" source="166" target="184">
+          <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Points" key="points"/>
+        </connections>
+        <connections xsi:type="org-fortiss-af3-component:Channel" xmi:id="179" id="179" name="pedestrianSignal" comment="pedestrianSignal" source="169" target="186">
+          <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Points" key="points"/>
+        </connections>
+        <connections xsi:type="org-fortiss-af3-component:Channel" xmi:id="180" id="180" name="indicatorSignalA" comment="indicatorSignalA" source="172" target="188">
+          <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Points" key="points">
+            <points x="480" y="252"/>
+          </layoutData>
+        </connections>
+        <connections xsi:type="org-fortiss-af3-component:Channel" xmi:id="181" id="181" name="indicatorSignalB" comment="indicatorSignalB" source="172" target="190">
+          <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Points" key="points">
+            <points x="480" y="348"/>
+          </layoutData>
+        </connections>
+        <connectors xsi:type="org-fortiss-af3-component:InputPort" xmi:id="182" id="182" name="ctrlInRequest" comment="ctrlInRequest" incoming="196" outgoing="177">
+          <specifications xsi:type="org-fortiss-af3-component:PortSpecification" xmi:id="183" id="183">
+            <type xsi:type="org-fortiss-af3-expression-types:TDefinedType" name="Signal" def="16"/>
+            <initialValue xsi:type="org-fortiss-af3-expression-terms:DefinedConst" value="NoVal"/>
+          </specifications>
+          <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos" x="24" y="48"/>
+          <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="108" height="72"/>
+          <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="cpos"/>
+          <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="cdim" width="0" height="0"/>
+          <layoutData xsi:type="org-fortiss-tooling-base-model-layout:OffsetOrientation" key="coffsetorient" offset="24" orientation="WEST"/>
+        </connectors>
+        <connectors xsi:type="org-fortiss-af3-component:OutputPort" xmi:id="184" id="184" name="ctrlOutTrafficSignal" comment="ctrlOutTrafficSignal" incoming="178" outgoing="197 450">
+          <specifications xsi:type="org-fortiss-af3-component:PortSpecification" xmi:id="185" id="185">
+            <type xsi:type="org-fortiss-af3-expression-types:TDefinedType" name="TrafficColor" def="5"/>
+            <initialValue xsi:type="org-fortiss-af3-expression-terms:DefinedConst" value="NoVal"/>
+          </specifications>
+          <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos" x="504" y="48"/>
+          <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="108" height="72"/>
+          <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="cpos"/>
+          <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="cdim" width="0" height="0"/>
+          <layoutData xsi:type="org-fortiss-tooling-base-model-layout:OffsetOrientation" key="coffsetorient" offset="24" orientation="EAST"/>
+        </connectors>
+        <connectors xsi:type="org-fortiss-af3-component:OutputPort" xmi:id="186" id="186" name="ctrlOutPedestrianSignal" comment="ctrlOutPedestrianSignal" incoming="179" outgoing="198 451">
+          <specifications xsi:type="org-fortiss-af3-component:PortSpecification" xmi:id="187" id="187">
+            <type xsi:type="org-fortiss-af3-expression-types:TDefinedType" name="PedestrianColor" def="13"/>
+            <initialValue xsi:type="org-fortiss-af3-expression-terms:DefinedConst" value="NoVal"/>
+          </specifications>
+          <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos" x="504" y="144"/>
+          <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="108" height="72"/>
+          <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="cpos"/>
+          <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="cdim" width="0" height="0"/>
+          <layoutData xsi:type="org-fortiss-tooling-base-model-layout:OffsetOrientation" key="coffsetorient" offset="120" orientation="EAST"/>
+        </connectors>
+        <connectors xsi:type="org-fortiss-af3-component:OutputPort" xmi:id="188" id="188" name="ctrlOutIndicatorSignalA" comment="ctrlOutIndicatorSignalA" incoming="180" outgoing="199 452">
+          <specifications xsi:type="org-fortiss-af3-component:PortSpecification" xmi:id="189" id="189">
+            <type xsi:type="org-fortiss-af3-expression-types:TDefinedType" name="IndicatorSignal" def="10"/>
+            <initialValue xsi:type="org-fortiss-af3-expression-terms:DefinedConst" value="NoVal"/>
+          </specifications>
+          <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos" x="504" y="240"/>
+          <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="108" height="72"/>
+          <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="cpos"/>
+          <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="cdim" width="0" height="0"/>
+          <layoutData xsi:type="org-fortiss-tooling-base-model-layout:OffsetOrientation" key="coffsetorient" offset="216" orientation="EAST"/>
+        </connectors>
+        <connectors xsi:type="org-fortiss-af3-component:OutputPort" xmi:id="190" id="190" name="ctrlOutIndicatorSignalB" comment="ctrlOutIndicatorSignalB" incoming="181" outgoing="200 453">
+          <specifications xsi:type="org-fortiss-af3-component:PortSpecification" xmi:id="191" id="191">
+            <type xsi:type="org-fortiss-af3-expression-types:TDefinedType" name="IndicatorSignal" def="10"/>
+            <initialValue xsi:type="org-fortiss-af3-expression-terms:DefinedConst" value="NoVal"/>
+          </specifications>
+          <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos" x="504" y="336"/>
+          <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="108" height="72"/>
+          <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="cpos"/>
+          <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="cdim" width="0" height="0"/>
+          <layoutData xsi:type="org-fortiss-tooling-base-model-layout:OffsetOrientation" key="coffsetorient" offset="312" orientation="EAST"/>
+        </connectors>
+        <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos" x="504" y="24"/>
+        <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="216" height="360"/>
+      </containedElements>
+      <containedElements xsi:type="org-fortiss-af3-component:Component" xmi:id="340" id="340" name="Panel" comment="">
+        <containedElements xsi:type="org-fortiss-af3-component:Component" xmi:id="341" id="341" name="Display" comment="">
+          <specifications xsi:type="org-fortiss-af3-component:CausalityComponentSpecification" xmi:id="342" id="342"/>
+          <specifications xsi:type="org-fortiss-af3-component:VerifBehaviourComponentSpecification" xmi:id="343" id="343"/>
+          <specifications xsi:type="org-fortiss-af3-operatorpanel:OperatorPanelSpecification" xmi:id="344" id="344" name="Operator Panel">
+            <containedElements xsi:type="org-fortiss-af3-operatorpanel:OPLabel" xmi:id="345" id="345" name="Request on ButtonB" comment="Request on ButtonB">
+              <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos" x="36" y="36"/>
+              <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="132" height="24"/>
+            </containedElements>
+            <containedElements xsi:type="org-fortiss-af3-operatorpanel:OPPushButton" xmi:id="346" id="346" name="ButtonB" comment="ButtonB">
+              <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos" x="192" y="24"/>
+              <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="96" height="36"/>
+              <onSelect>
+                <variable identifier="displayOutButtonB"/>
+                <value xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                  <function xsi:type="org-fortiss-af3-expression-terms:UserdefinedFunction" xmi:id="347" id="347" name="Present"/>
+                </value>
+              </onSelect>
+            </containedElements>
+            <containedElements xsi:type="org-fortiss-af3-operatorpanel:OPLabel" xmi:id="348" id="348" name="Traffic Lights" comment="Traffic Lights">
+              <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos" x="36" y="96"/>
+              <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="96" height="36"/>
+            </containedElements>
+            <containedElements xsi:type="org-fortiss-af3-operatorpanel:OPColorDisplay" xmi:id="349" id="349" name="TrafficRed">
+              <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos" x="48" y="132"/>
+              <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="72" height="72"/>
+              <reactions red="255" green="204" blue="153">
+                <guard>
+                  <expression xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                    <function xsi:type="org-fortiss-af3-expression-terms:PredefinedFunction" operator="Or"/>
+                    <arguments xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                      <function xsi:type="org-fortiss-af3-expression-terms:PredefinedFunction" operator="Equal"/>
+                      <arguments xsi:type="org-fortiss-af3-expression-terms:Var" identifier="displayInTrafficSignal"/>
+                      <arguments xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                        <function xsi:type="org-fortiss-af3-expression-terms:UserdefinedFunction" xmi:id="350" id="350" name="Red"/>
+                      </arguments>
+                    </arguments>
+                    <arguments xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                      <function xsi:type="org-fortiss-af3-expression-terms:PredefinedFunction" operator="Equal"/>
+                      <arguments xsi:type="org-fortiss-af3-expression-terms:Var" identifier="displayInTrafficSignal"/>
+                      <arguments xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                        <function xsi:type="org-fortiss-af3-expression-terms:UserdefinedFunction" xmi:id="351" id="351" name="RedYellow"/>
+                      </arguments>
+                    </arguments>
+                  </expression>
+                </guard>
+              </reactions>
+              <reactions red="255" green="255" blue="255">
+                <guard>
+                  <expression xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                    <function xsi:type="org-fortiss-af3-expression-terms:PredefinedFunction" operator="And"/>
+                    <arguments xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                      <function xsi:type="org-fortiss-af3-expression-terms:PredefinedFunction" operator="NotEqual"/>
+                      <arguments xsi:type="org-fortiss-af3-expression-terms:Var" identifier="displayInTrafficSignal"/>
+                      <arguments xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                        <function xsi:type="org-fortiss-af3-expression-terms:UserdefinedFunction" xmi:id="352" id="352" name="Red"/>
+                      </arguments>
+                    </arguments>
+                    <arguments xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                      <function xsi:type="org-fortiss-af3-expression-terms:PredefinedFunction" operator="NotEqual"/>
+                      <arguments xsi:type="org-fortiss-af3-expression-terms:Var" identifier="displayInTrafficSignal"/>
+                      <arguments xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                        <function xsi:type="org-fortiss-af3-expression-terms:UserdefinedFunction" xmi:id="353" id="353" name="RedYellow"/>
+                      </arguments>
+                    </arguments>
+                  </expression>
+                </guard>
+              </reactions>
+            </containedElements>
+            <containedElements xsi:type="org-fortiss-af3-operatorpanel:OPColorDisplay" xmi:id="354" id="354" name="TrafficYellow">
+              <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos" x="48" y="216"/>
+              <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="72" height="72"/>
+              <reactions red="255" green="255" blue="153">
+                <guard>
+                  <expression xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                    <function xsi:type="org-fortiss-af3-expression-terms:PredefinedFunction" operator="Or"/>
+                    <arguments xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                      <function xsi:type="org-fortiss-af3-expression-terms:PredefinedFunction" operator="Equal"/>
+                      <arguments xsi:type="org-fortiss-af3-expression-terms:Var" identifier="displayInTrafficSignal"/>
+                      <arguments xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                        <function xsi:type="org-fortiss-af3-expression-terms:UserdefinedFunction" xmi:id="355" id="355" name="Yellow"/>
+                      </arguments>
+                    </arguments>
+                    <arguments xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                      <function xsi:type="org-fortiss-af3-expression-terms:PredefinedFunction" operator="Equal"/>
+                      <arguments xsi:type="org-fortiss-af3-expression-terms:Var" identifier="displayInTrafficSignal"/>
+                      <arguments xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                        <function xsi:type="org-fortiss-af3-expression-terms:UserdefinedFunction" xmi:id="356" id="356" name="RedYellow"/>
+                      </arguments>
+                    </arguments>
+                  </expression>
+                </guard>
+              </reactions>
+              <reactions red="255" green="255" blue="255">
+                <guard>
+                  <expression xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                    <function xsi:type="org-fortiss-af3-expression-terms:PredefinedFunction" operator="And"/>
+                    <arguments xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                      <function xsi:type="org-fortiss-af3-expression-terms:PredefinedFunction" operator="NotEqual"/>
+                      <arguments xsi:type="org-fortiss-af3-expression-terms:Var" identifier="displayInTrafficSignal"/>
+                      <arguments xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                        <function xsi:type="org-fortiss-af3-expression-terms:UserdefinedFunction" xmi:id="357" id="357" name="Yellow"/>
+                      </arguments>
+                    </arguments>
+                    <arguments xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                      <function xsi:type="org-fortiss-af3-expression-terms:PredefinedFunction" operator="NotEqual"/>
+                      <arguments xsi:type="org-fortiss-af3-expression-terms:Var" identifier="displayInTrafficSignal"/>
+                      <arguments xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                        <function xsi:type="org-fortiss-af3-expression-terms:UserdefinedFunction" xmi:id="358" id="358" name="RedYellow"/>
+                      </arguments>
+                    </arguments>
+                  </expression>
+                </guard>
+              </reactions>
+            </containedElements>
+            <containedElements xsi:type="org-fortiss-af3-operatorpanel:OPColorDisplay" xmi:id="359" id="359" name="TrafficGreen">
+              <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos" x="48" y="300"/>
+              <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="72" height="72"/>
+              <reactions red="189" green="221" blue="141">
+                <guard>
+                  <expression xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                    <function xsi:type="org-fortiss-af3-expression-terms:PredefinedFunction" operator="Equal"/>
+                    <arguments xsi:type="org-fortiss-af3-expression-terms:Var" identifier="displayInTrafficSignal"/>
+                    <arguments xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                      <function xsi:type="org-fortiss-af3-expression-terms:UserdefinedFunction" xmi:id="360" id="360" name="Green"/>
+                    </arguments>
+                  </expression>
+                </guard>
+              </reactions>
+              <reactions red="255" green="255" blue="255">
+                <guard>
+                  <expression xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                    <function xsi:type="org-fortiss-af3-expression-terms:PredefinedFunction" operator="NotEqual"/>
+                    <arguments xsi:type="org-fortiss-af3-expression-terms:Var" identifier="displayInTrafficSignal"/>
+                    <arguments xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                      <function xsi:type="org-fortiss-af3-expression-terms:UserdefinedFunction" xmi:id="361" id="361" name="Green"/>
+                    </arguments>
+                  </expression>
+                </guard>
+              </reactions>
+            </containedElements>
+            <containedElements xsi:type="org-fortiss-af3-operatorpanel:OPLabel" xmi:id="362" id="362" name="Pedestrian Lights" comment="Pedestrian Lights">
+              <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos" x="180" y="96"/>
+              <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="120" height="36"/>
+            </containedElements>
+            <containedElements xsi:type="org-fortiss-af3-operatorpanel:OPColorDisplay" xmi:id="363" id="363" name="PedestrianRed">
+              <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos" x="204" y="132"/>
+              <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="72" height="72"/>
+              <reactions red="255" green="204" blue="153">
+                <guard>
+                  <expression xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                    <function xsi:type="org-fortiss-af3-expression-terms:PredefinedFunction" operator="Equal"/>
+                    <arguments xsi:type="org-fortiss-af3-expression-terms:Var" identifier="displayInPedestrianSignal"/>
+                    <arguments xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                      <function xsi:type="org-fortiss-af3-expression-terms:UserdefinedFunction" xmi:id="364" id="364" name="Stop"/>
+                    </arguments>
+                  </expression>
+                </guard>
+              </reactions>
+              <reactions red="255" green="255" blue="255">
+                <guard>
+                  <expression xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                    <function xsi:type="org-fortiss-af3-expression-terms:PredefinedFunction" operator="NotEqual"/>
+                    <arguments xsi:type="org-fortiss-af3-expression-terms:Var" identifier="displayInPedestrianSignal"/>
+                    <arguments xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                      <function xsi:type="org-fortiss-af3-expression-terms:UserdefinedFunction" xmi:id="365" id="365" name="Stop"/>
+                    </arguments>
+                  </expression>
+                </guard>
+              </reactions>
+            </containedElements>
+            <containedElements xsi:type="org-fortiss-af3-operatorpanel:OPColorDisplay" xmi:id="366" id="366" name="PedestrianGreen">
+              <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos" x="204" y="216"/>
+              <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="72" height="72"/>
+              <reactions red="189" green="221" blue="141">
+                <guard>
+                  <expression xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                    <function xsi:type="org-fortiss-af3-expression-terms:PredefinedFunction" operator="Equal"/>
+                    <arguments xsi:type="org-fortiss-af3-expression-terms:Var" identifier="displayInPedestrianSignal"/>
+                    <arguments xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                      <function xsi:type="org-fortiss-af3-expression-terms:UserdefinedFunction" xmi:id="367" id="367" name="Walk"/>
+                    </arguments>
+                  </expression>
+                </guard>
+              </reactions>
+              <reactions red="255" green="255" blue="255">
+                <guard>
+                  <expression xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                    <function xsi:type="org-fortiss-af3-expression-terms:PredefinedFunction" operator="NotEqual"/>
+                    <arguments xsi:type="org-fortiss-af3-expression-terms:Var" identifier="displayInPedestrianSignal"/>
+                    <arguments xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                      <function xsi:type="org-fortiss-af3-expression-terms:UserdefinedFunction" xmi:id="368" id="368" name="Walk"/>
+                    </arguments>
+                  </expression>
+                </guard>
+              </reactions>
+            </containedElements>
+            <containedElements xsi:type="org-fortiss-af3-operatorpanel:OPLabel" xmi:id="369" id="369" name="Indicator Signal A" comment="Indicator Signal A">
+              <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos" x="36" y="408"/>
+              <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="120" height="36"/>
+            </containedElements>
+            <containedElements xsi:type="org-fortiss-af3-operatorpanel:OPColorDisplay" xmi:id="370" id="370" name="IndicatorA">
+              <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos" x="48" y="444"/>
+              <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="72" height="72"/>
+              <reactions red="153" green="204" blue="255">
+                <guard>
+                  <expression xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                    <function xsi:type="org-fortiss-af3-expression-terms:PredefinedFunction" operator="Equal"/>
+                    <arguments xsi:type="org-fortiss-af3-expression-terms:Var" identifier="displayInIndicatorSignalA"/>
+                    <arguments xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                      <function xsi:type="org-fortiss-af3-expression-terms:UserdefinedFunction" xmi:id="371" id="371" name="On"/>
+                    </arguments>
+                  </expression>
+                </guard>
+              </reactions>
+              <reactions red="255" green="255" blue="255">
+                <guard>
+                  <expression xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                    <function xsi:type="org-fortiss-af3-expression-terms:PredefinedFunction" operator="NotEqual"/>
+                    <arguments xsi:type="org-fortiss-af3-expression-terms:Var" identifier="displayInIndicatorSignalA"/>
+                    <arguments xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                      <function xsi:type="org-fortiss-af3-expression-terms:UserdefinedFunction" xmi:id="372" id="372" name="On"/>
+                    </arguments>
+                  </expression>
+                </guard>
+              </reactions>
+            </containedElements>
+            <containedElements xsi:type="org-fortiss-af3-operatorpanel:OPLabel" xmi:id="373" id="373" name="Indicator Signal B" comment="Indicator Signal B">
+              <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos" x="192" y="408"/>
+              <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="120" height="36"/>
+            </containedElements>
+            <containedElements xsi:type="org-fortiss-af3-operatorpanel:OPColorDisplay" xmi:id="374" id="374" name="IndicatorB">
+              <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos" x="204" y="444"/>
+              <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="72" height="72"/>
+              <reactions red="153" green="204" blue="255">
+                <guard>
+                  <expression xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                    <function xsi:type="org-fortiss-af3-expression-terms:PredefinedFunction" operator="Equal"/>
+                    <arguments xsi:type="org-fortiss-af3-expression-terms:Var" identifier="displayInIndicatorSignalB"/>
+                    <arguments xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                      <function xsi:type="org-fortiss-af3-expression-terms:UserdefinedFunction" xmi:id="375" id="375" name="On"/>
+                    </arguments>
+                  </expression>
+                </guard>
+              </reactions>
+              <reactions red="255" green="255" blue="255">
+                <guard>
+                  <expression xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                    <function xsi:type="org-fortiss-af3-expression-terms:PredefinedFunction" operator="NotEqual"/>
+                    <arguments xsi:type="org-fortiss-af3-expression-terms:Var" identifier="displayInIndicatorSignalB"/>
+                    <arguments xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                      <function xsi:type="org-fortiss-af3-expression-terms:UserdefinedFunction" xmi:id="376" id="376" name="On"/>
+                    </arguments>
+                  </expression>
+                </guard>
+              </reactions>
+            </containedElements>
+          </specifications>
+          <connectors xsi:type="org-fortiss-af3-component:InputPort" xmi:id="377" id="377" name="displayInIndicatorSignalB" comment="displayInIndicatorSignalB" incoming="439">
+            <specifications xsi:type="org-fortiss-af3-component:PortSpecification" xmi:id="378" id="378">
+              <type xsi:type="org-fortiss-af3-expression-types:TDefinedType" name="IndicatorSignal" def="10"/>
+              <initialValue xsi:type="org-fortiss-af3-expression-terms:DefinedConst" value="NoVal"/>
+            </specifications>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos" x="24" y="24"/>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="108" height="72"/>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="cpos"/>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="cdim" width="0" height="0"/>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:OffsetOrientation" key="coffsetorient" offset="24" orientation="EAST"/>
+          </connectors>
+          <connectors xsi:type="org-fortiss-af3-component:InputPort" xmi:id="379" id="379" name="displayInIndicatorSignalA" comment="displayInIndicatorSignalA" incoming="438">
+            <specifications xsi:type="org-fortiss-af3-component:PortSpecification" xmi:id="380" id="380">
+              <type xsi:type="org-fortiss-af3-expression-types:TDefinedType" name="IndicatorSignal" def="10"/>
+              <initialValue xsi:type="org-fortiss-af3-expression-terms:DefinedConst" value="NoVal"/>
+            </specifications>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos" x="24" y="48"/>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="108" height="72"/>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="cpos"/>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="cdim" width="0" height="0"/>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:OffsetOrientation" key="coffsetorient" offset="60" orientation="EAST"/>
+          </connectors>
+          <connectors xsi:type="org-fortiss-af3-component:InputPort" xmi:id="381" id="381" name="displayInPedestrianSignal" comment="displayInPedestrianSignal" incoming="437">
+            <specifications xsi:type="org-fortiss-af3-component:PortSpecification" xmi:id="382" id="382">
+              <type xsi:type="org-fortiss-af3-expression-types:TDefinedType" name="PedestrianColor" def="13"/>
+              <initialValue xsi:type="org-fortiss-af3-expression-terms:DefinedConst" value="NoVal"/>
+            </specifications>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos" x="24" y="72"/>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="108" height="72"/>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="cpos"/>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="cdim" width="0" height="0"/>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:OffsetOrientation" key="coffsetorient" offset="96" orientation="EAST"/>
+          </connectors>
+          <connectors xsi:type="org-fortiss-af3-component:InputPort" xmi:id="383" id="383" name="displayInTrafficSignal" comment="displayInTrafficSignal" incoming="436">
+            <specifications xsi:type="org-fortiss-af3-component:PortSpecification" xmi:id="384" id="384">
+              <type xsi:type="org-fortiss-af3-expression-types:TDefinedType" name="TrafficColor" def="5"/>
+              <initialValue xsi:type="org-fortiss-af3-expression-terms:DefinedConst" value="NoVal"/>
+            </specifications>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos" x="24" y="96"/>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="108" height="72"/>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="cpos"/>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="cdim" width="0" height="0"/>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:OffsetOrientation" key="coffsetorient" offset="132" orientation="EAST"/>
+          </connectors>
+          <connectors xsi:type="org-fortiss-af3-component:OutputPort" xmi:id="385" id="385" name="displayOutButtonB" comment="displayOutButtonB" outgoing="431">
+            <specifications xsi:type="org-fortiss-af3-component:PortSpecification" xmi:id="386" id="386">
+              <type xsi:type="org-fortiss-af3-expression-types:TDefinedType" name="Signal" def="16"/>
+              <initialValue xsi:type="org-fortiss-af3-expression-terms:DefinedConst" value="NoVal"/>
+            </specifications>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos" x="24" y="120"/>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="108" height="72"/>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="cpos"/>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="cdim" width="0" height="0"/>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:OffsetOrientation" key="coffsetorient" offset="24" orientation="WEST"/>
+          </connectors>
+          <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos" x="168" y="24"/>
+          <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="216" height="180"/>
+        </containedElements>
+        <containedElements xsi:type="org-fortiss-af3-component:Component" xmi:id="387" id="387" name="HAL" comment="">
+          <specifications xsi:type="org-fortiss-af3-component:CausalityComponentSpecification" xmi:id="388" id="388"/>
+          <specifications xsi:type="org-fortiss-af3-component:VerifBehaviourComponentSpecification" xmi:id="389" id="389"/>
+          <specifications xsi:type="org-fortiss-af3-state:StateAutomaton" xmi:id="390" id="390">
+            <containedElements xsi:type="org-fortiss-af3-state:State" xmi:id="391" id="391" name="RootState" comment="">
+              <containedElements xsi:type="org-fortiss-af3-state:State" xmi:id="392" id="392" name="HAL" comment="">
+                <specifications xsi:type="org-fortiss-af3-state:StateSpecification" xmi:id="393" id="393" initial="true">
+                  <idleTransitionsSpecifications xmi:id="394" id="394"/>
+                </specifications>
+                <connectors xsi:type="org-fortiss-af3-state:TransitionSegmentExitConnector" xmi:id="395" id="395" name="Source" comment="" outgoing="401">
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="108" height="72"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="cpos"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="cdim" width="0" height="0"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Angle" key="cangle" angle="1.0471975511965976"/>
+                </connectors>
+                <connectors xsi:type="org-fortiss-af3-state:TransitionSegmentEntryConnector" xmi:id="396" id="396" name="Target" comment="" incoming="401">
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="108" height="72"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="cpos"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="cdim" width="0" height="0"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Angle" key="cangle" angle="2.0943951023931953"/>
+                </connectors>
+                <connectors xsi:type="org-fortiss-af3-state:TransitionSegmentExitConnector" xmi:id="397" id="397" name="Source" comment="" outgoing="403">
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="108" height="72"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="cpos"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="cdim" width="0" height="0"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Angle" key="cangle" angle="4.1887902047863905"/>
+                </connectors>
+                <connectors xsi:type="org-fortiss-af3-state:TransitionSegmentEntryConnector" xmi:id="398" id="398" name="Target" comment="" incoming="403">
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="108" height="72"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="cpos"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="cdim" width="0" height="0"/>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Angle" key="cangle" angle="5.235987755982989"/>
+                </connectors>
+                <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos" x="80" y="120"/>
+                <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="162" height="86"/>
+              </containedElements>
+              <specifications xsi:type="org-fortiss-af3-state:StateSpecification" xmi:id="399" id="399">
+                <idleTransitionsSpecifications xmi:id="400" id="400"/>
+              </specifications>
+              <connections xsi:type="org-fortiss-af3-state:TransitionSegment" xmi:id="401" id="401" name="setAndOutputVariables" comment="" source="395" target="396">
+                <specifications xsi:type="org-fortiss-af3-state:TransitionSegmentSpecification" xmi:id="402" id="402">
+                  <guard>
+                    <expression xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                      <function xsi:type="org-fortiss-af3-expression-terms:PredefinedFunction" operator="And"/>
+                      <arguments xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                        <function xsi:type="org-fortiss-af3-expression-terms:PredefinedFunction" operator="And"/>
+                        <arguments xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                          <function xsi:type="org-fortiss-af3-expression-terms:PredefinedFunction" operator="And"/>
+                          <arguments xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                            <function xsi:type="org-fortiss-af3-expression-terms:PredefinedFunction" operator="NotEqual"/>
+                            <arguments xsi:type="org-fortiss-af3-expression-terms:Var" identifier="HALInTrafficSignal"/>
+                            <arguments xsi:type="org-fortiss-af3-expression-terms:DefinedConst" value="NoVal"/>
+                          </arguments>
+                          <arguments xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                            <function xsi:type="org-fortiss-af3-expression-terms:PredefinedFunction" operator="NotEqual"/>
+                            <arguments xsi:type="org-fortiss-af3-expression-terms:Var" identifier="HALInPedestrianSignal"/>
+                            <arguments xsi:type="org-fortiss-af3-expression-terms:DefinedConst" value="NoVal"/>
+                          </arguments>
+                        </arguments>
+                        <arguments xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                          <function xsi:type="org-fortiss-af3-expression-terms:PredefinedFunction" operator="NotEqual"/>
+                          <arguments xsi:type="org-fortiss-af3-expression-terms:Var" identifier="HALInIndicatorSignalA"/>
+                          <arguments xsi:type="org-fortiss-af3-expression-terms:DefinedConst" value="NoVal"/>
+                        </arguments>
+                      </arguments>
+                      <arguments xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                        <function xsi:type="org-fortiss-af3-expression-terms:PredefinedFunction" operator="NotEqual"/>
+                        <arguments xsi:type="org-fortiss-af3-expression-terms:Var" identifier="HALInIndicatorSignalB"/>
+                        <arguments xsi:type="org-fortiss-af3-expression-terms:DefinedConst" value="NoVal"/>
+                      </arguments>
+                    </expression>
+                  </guard>
+                  <actions>
+                    <variable identifier="trafficSignal"/>
+                    <value xsi:type="org-fortiss-af3-expression-terms:Var" identifier="HALInTrafficSignal"/>
+                  </actions>
+                  <actions>
+                    <variable identifier="pedestrianSignal"/>
+                    <value xsi:type="org-fortiss-af3-expression-terms:Var" identifier="HALInPedestrianSignal"/>
+                  </actions>
+                  <actions>
+                    <variable identifier="indicatorSignalA"/>
+                    <value xsi:type="org-fortiss-af3-expression-terms:Var" identifier="HALInIndicatorSignalA"/>
+                  </actions>
+                  <actions>
+                    <variable identifier="indicatorSignalB"/>
+                    <value xsi:type="org-fortiss-af3-expression-terms:Var" identifier="HALInIndicatorSignalB"/>
+                  </actions>
+                  <actions>
+                    <variable identifier="HALOutTrafficSignal"/>
+                    <value xsi:type="org-fortiss-af3-expression-terms:Var" identifier="trafficSignal"/>
+                  </actions>
+                  <actions>
+                    <variable identifier="HALOutPedestrianSignal"/>
+                    <value xsi:type="org-fortiss-af3-expression-terms:Var" identifier="pedestrianSignal"/>
+                  </actions>
+                  <actions>
+                    <variable identifier="HALOutIndicatorSignalA"/>
+                    <value xsi:type="org-fortiss-af3-expression-terms:Var" identifier="indicatorSignalA"/>
+                  </actions>
+                  <actions>
+                    <variable identifier="HALOutIndicatorSignalB"/>
+                    <value xsi:type="org-fortiss-af3-expression-terms:Var" identifier="indicatorSignalB"/>
+                  </actions>
+                </specifications>
+                <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Points" key="points">
+                  <points x="160" y="260"/>
+                </layoutData>
+              </connections>
+              <connections xsi:type="org-fortiss-af3-state:TransitionSegment" xmi:id="403" id="403" name="outputVariables" comment="" source="397" target="398">
+                <specifications xsi:type="org-fortiss-af3-state:TransitionSegmentSpecification" xmi:id="404" id="404">
+                  <guard>
+                    <expression xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                      <function xsi:type="org-fortiss-af3-expression-terms:PredefinedFunction" operator="And"/>
+                      <arguments xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                        <function xsi:type="org-fortiss-af3-expression-terms:PredefinedFunction" operator="And"/>
+                        <arguments xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                          <function xsi:type="org-fortiss-af3-expression-terms:PredefinedFunction" operator="And"/>
+                          <arguments xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                            <function xsi:type="org-fortiss-af3-expression-terms:PredefinedFunction" operator="Equal"/>
+                            <arguments xsi:type="org-fortiss-af3-expression-terms:Var" identifier="HALInTrafficSignal"/>
+                            <arguments xsi:type="org-fortiss-af3-expression-terms:DefinedConst" value="NoVal"/>
+                          </arguments>
+                          <arguments xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                            <function xsi:type="org-fortiss-af3-expression-terms:PredefinedFunction" operator="Equal"/>
+                            <arguments xsi:type="org-fortiss-af3-expression-terms:Var" identifier="HALInPedestrianSignal"/>
+                            <arguments xsi:type="org-fortiss-af3-expression-terms:DefinedConst" value="NoVal"/>
+                          </arguments>
+                        </arguments>
+                        <arguments xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                          <function xsi:type="org-fortiss-af3-expression-terms:PredefinedFunction" operator="Equal"/>
+                          <arguments xsi:type="org-fortiss-af3-expression-terms:Var" identifier="HALInIndicatorSignalA"/>
+                          <arguments xsi:type="org-fortiss-af3-expression-terms:DefinedConst" value="NoVal"/>
+                        </arguments>
+                      </arguments>
+                      <arguments xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                        <function xsi:type="org-fortiss-af3-expression-terms:PredefinedFunction" operator="Equal"/>
+                        <arguments xsi:type="org-fortiss-af3-expression-terms:Var" identifier="HALInIndicatorSignalB"/>
+                        <arguments xsi:type="org-fortiss-af3-expression-terms:DefinedConst" value="NoVal"/>
+                      </arguments>
+                    </expression>
+                  </guard>
+                  <actions>
+                    <variable identifier="HALOutTrafficSignal"/>
+                    <value xsi:type="org-fortiss-af3-expression-terms:Var" identifier="trafficSignal"/>
+                  </actions>
+                  <actions>
+                    <variable identifier="HALOutPedestrianSignal"/>
+                    <value xsi:type="org-fortiss-af3-expression-terms:Var" identifier="pedestrianSignal"/>
+                  </actions>
+                  <actions>
+                    <variable identifier="HALOutIndicatorSignalA"/>
+                    <value xsi:type="org-fortiss-af3-expression-terms:Var" identifier="indicatorSignalA"/>
+                  </actions>
+                  <actions>
+                    <variable identifier="HALOutIndicatorSignalB"/>
+                    <value xsi:type="org-fortiss-af3-expression-terms:Var" identifier="indicatorSignalB"/>
+                  </actions>
+                </specifications>
+                <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Points" key="points">
+                  <points x="160" y="70"/>
+                </layoutData>
+              </connections>
+              <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos"/>
+              <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="108" height="72"/>
+            </containedElements>
+            <dataStateVariables xmi:id="405" id="405">
+              <variable identifier="indicatorSignalA"/>
+              <initialValue xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                <function xsi:type="org-fortiss-af3-expression-terms:UserdefinedFunction" xmi:id="406" id="406" name="Off"/>
+              </initialValue>
+              <type xsi:type="org-fortiss-af3-expression-types:TDefinedType" name="IndicatorSignal" def="10"/>
+            </dataStateVariables>
+            <dataStateVariables xmi:id="407" id="407">
+              <variable identifier="indicatorSignalB"/>
+              <initialValue xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                <function xsi:type="org-fortiss-af3-expression-terms:UserdefinedFunction" xmi:id="408" id="408" name="Off"/>
+              </initialValue>
+              <type xsi:type="org-fortiss-af3-expression-types:TDefinedType" name="IndicatorSignal" def="10"/>
+            </dataStateVariables>
+            <dataStateVariables xmi:id="409" id="409">
+              <variable identifier="pedestrianSignal"/>
+              <initialValue xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                <function xsi:type="org-fortiss-af3-expression-terms:UserdefinedFunction" xmi:id="410" id="410" name="Stop"/>
+              </initialValue>
+              <type xsi:type="org-fortiss-af3-expression-types:TDefinedType" name="PedestrianColor" def="13"/>
+            </dataStateVariables>
+            <dataStateVariables xmi:id="411" id="411">
+              <variable identifier="trafficSignal"/>
+              <initialValue xsi:type="org-fortiss-af3-expression-terms:FunctionCall">
+                <function xsi:type="org-fortiss-af3-expression-terms:UserdefinedFunction" xmi:id="412" id="412" name="Green"/>
+              </initialValue>
+              <type xsi:type="org-fortiss-af3-expression-types:TDefinedType" name="TrafficColor" def="5"/>
+            </dataStateVariables>
+          </specifications>
+          <connectors xsi:type="org-fortiss-af3-component:InputPort" xmi:id="413" id="413" name="HALInIndicatorSignalB" comment="HALInIndicatorSignalB" incoming="435">
+            <specifications xsi:type="org-fortiss-af3-component:PortSpecification" xmi:id="414" id="414">
+              <type xsi:type="org-fortiss-af3-expression-types:TDefinedType" name="IndicatorSignal" def="10"/>
+              <initialValue xsi:type="org-fortiss-af3-expression-terms:DefinedConst" value="NoVal"/>
+            </specifications>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos" x="24" y="24"/>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="108" height="72"/>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="cpos"/>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="cdim" width="0" height="0"/>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:OffsetOrientation" key="coffsetorient" offset="24" orientation="EAST"/>
+          </connectors>
+          <connectors xsi:type="org-fortiss-af3-component:InputPort" xmi:id="415" id="415" name="HALInIndicatorSignalA" comment="HALInIndicatorSignalA" incoming="434">
+            <specifications xsi:type="org-fortiss-af3-component:PortSpecification" xmi:id="416" id="416">
+              <type xsi:type="org-fortiss-af3-expression-types:TDefinedType" name="IndicatorSignal" def="10"/>
+              <initialValue xsi:type="org-fortiss-af3-expression-terms:DefinedConst" value="NoVal"/>
+            </specifications>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos" x="24" y="48"/>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="108" height="72"/>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="cpos"/>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="cdim" width="0" height="0"/>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:OffsetOrientation" key="coffsetorient" offset="60" orientation="EAST"/>
+          </connectors>
+          <connectors xsi:type="org-fortiss-af3-component:InputPort" xmi:id="417" id="417" name="HALInPedestrianSignal" comment="HALInPedestrianSignal" incoming="433">
+            <specifications xsi:type="org-fortiss-af3-component:PortSpecification" xmi:id="418" id="418">
+              <type xsi:type="org-fortiss-af3-expression-types:TDefinedType" name="PedestrianColor" def="13"/>
+              <initialValue xsi:type="org-fortiss-af3-expression-terms:DefinedConst" value="NoVal"/>
+            </specifications>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos" x="24" y="72"/>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="108" height="72"/>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="cpos"/>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="cdim" width="0" height="0"/>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:OffsetOrientation" key="coffsetorient" offset="96" orientation="EAST"/>
+          </connectors>
+          <connectors xsi:type="org-fortiss-af3-component:InputPort" xmi:id="419" id="419" name="HALInTrafficSignal" comment="HALInTrafficSignal" incoming="432">
+            <specifications xsi:type="org-fortiss-af3-component:PortSpecification" xmi:id="420" id="420">
+              <type xsi:type="org-fortiss-af3-expression-types:TDefinedType" name="TrafficColor" def="5"/>
+              <initialValue xsi:type="org-fortiss-af3-expression-terms:DefinedConst" value="NoVal"/>
+            </specifications>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos" x="24" y="96"/>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="108" height="72"/>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="cpos"/>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="cdim" width="0" height="0"/>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:OffsetOrientation" key="coffsetorient" offset="132" orientation="EAST"/>
+          </connectors>
+          <connectors xsi:type="org-fortiss-af3-component:OutputPort" xmi:id="421" id="421" name="HALOutIndicatorSignalB" comment="HALOutIndicatorSignalB" outgoing="439">
+            <specifications xsi:type="org-fortiss-af3-component:PortSpecification" xmi:id="422" id="422">
+              <type xsi:type="org-fortiss-af3-expression-types:TDefinedType" name="IndicatorSignal" def="10"/>
+              <initialValue xsi:type="org-fortiss-af3-expression-terms:DefinedConst" value="NoVal"/>
+            </specifications>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos" x="24" y="120"/>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="108" height="72"/>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="cpos"/>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="cdim" width="0" height="0"/>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:OffsetOrientation" key="coffsetorient" offset="24" orientation="WEST"/>
+          </connectors>
+          <connectors xsi:type="org-fortiss-af3-component:OutputPort" xmi:id="423" id="423" name="HALOutIndicatorSignalA" comment="HALOutIndicatorSignalA" outgoing="438">
+            <specifications xsi:type="org-fortiss-af3-component:PortSpecification" xmi:id="424" id="424">
+              <type xsi:type="org-fortiss-af3-expression-types:TDefinedType" name="IndicatorSignal" def="10"/>
+              <initialValue xsi:type="org-fortiss-af3-expression-terms:DefinedConst" value="NoVal"/>
+            </specifications>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos" x="24" y="144"/>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="108" height="72"/>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="cpos"/>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="cdim" width="0" height="0"/>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:OffsetOrientation" key="coffsetorient" offset="60" orientation="WEST"/>
+          </connectors>
+          <connectors xsi:type="org-fortiss-af3-component:OutputPort" xmi:id="425" id="425" name="HALOutPedestrianSignal" comment="HALOutPedestrianSignal" outgoing="437">
+            <specifications xsi:type="org-fortiss-af3-component:PortSpecification" xmi:id="426" id="426">
+              <type xsi:type="org-fortiss-af3-expression-types:TDefinedType" name="PedestrianColor" def="13"/>
+              <initialValue xsi:type="org-fortiss-af3-expression-terms:DefinedConst" value="NoVal"/>
+            </specifications>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos" x="24" y="168"/>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="108" height="72"/>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="cpos"/>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="cdim" width="0" height="0"/>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:OffsetOrientation" key="coffsetorient" offset="96" orientation="WEST"/>
+          </connectors>
+          <connectors xsi:type="org-fortiss-af3-component:OutputPort" xmi:id="427" id="427" name="HALOutTrafficSignal" comment="HALOutTrafficSignal" outgoing="436">
+            <specifications xsi:type="org-fortiss-af3-component:PortSpecification" xmi:id="428" id="428">
+              <type xsi:type="org-fortiss-af3-expression-types:TDefinedType" name="TrafficColor" def="5"/>
+              <initialValue xsi:type="org-fortiss-af3-expression-terms:DefinedConst" value="NoVal"/>
+            </specifications>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos" x="24" y="192"/>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="108" height="72"/>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="cpos"/>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="cdim" width="0" height="0"/>
+            <layoutData xsi:type="org-fortiss-tooling-base-model-layout:OffsetOrientation" key="coffsetorient" offset="132" orientation="WEST"/>
+          </connectors>
+          <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos" x="504" y="24"/>
+          <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="216" height="180"/>
+        </containedElements>
+        <specifications xsi:type="org-fortiss-af3-component:CausalityComponentSpecification" xmi:id="429" id="429"/>
+        <specifications xsi:type="org-fortiss-af3-component:VerifBehaviourComponentSpecification" xmi:id="430" id="430"/>
+        <connections xsi:type="org-fortiss-af3-component:Channel" xmi:id="431" id="431" name="buttonB" comment="buttonB" source="385" target="448">
+          <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Points" key="points"/>
+        </connections>
+        <connections xsi:type="org-fortiss-af3-component:Channel" xmi:id="432" id="432" name="trafficSignal" comment="trafficSignal" source="446" target="419">
+          <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Points" key="points"/>
+        </connections>
+        <connections xsi:type="org-fortiss-af3-component:Channel" xmi:id="433" id="433" name="pedestrianSignal" comment="pedestrianSignal" source="444" target="417">
+          <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Points" key="points"/>
+        </connections>
+        <connections xsi:type="org-fortiss-af3-component:Channel" xmi:id="434" id="434" name="indicatorSignalA" comment="indicatorSignalA" source="442" target="415">
+          <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Points" key="points"/>
+        </connections>
+        <connections xsi:type="org-fortiss-af3-component:Channel" xmi:id="435" id="435" name="indicatorSignalB" comment="indicatorSignalB" source="440" target="413">
+          <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Points" key="points"/>
+        </connections>
+        <connections xsi:type="org-fortiss-af3-component:Channel" xmi:id="436" id="436" name="trafficSignal" comment="trafficSignal" source="427" target="383">
+          <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Points" key="points"/>
+        </connections>
+        <connections xsi:type="org-fortiss-af3-component:Channel" xmi:id="437" id="437" name="pedestrianSignal" comment="pedestrianSignal" source="425" target="381">
+          <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Points" key="points"/>
+        </connections>
+        <connections xsi:type="org-fortiss-af3-component:Channel" xmi:id="438" id="438" name="indicatorSignalA" comment="indicatorSignalA" source="423" target="379">
+          <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Points" key="points"/>
+        </connections>
+        <connections xsi:type="org-fortiss-af3-component:Channel" xmi:id="439" id="439" name="indicatorSignalB" comment="indicatorSignalB" source="421" target="377">
+          <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Points" key="points"/>
+        </connections>
+        <connectors xsi:type="org-fortiss-af3-component:InputPort" xmi:id="440" id="440" name="panelInIndicatorSignalB" comment="panelInIndicatorSignalB" incoming="453" outgoing="435">
+          <specifications xsi:type="org-fortiss-af3-component:PortSpecification" xmi:id="441" id="441">
+            <type xsi:type="org-fortiss-af3-expression-types:TDefinedType" name="IndicatorSignal" def="10"/>
+            <initialValue xsi:type="org-fortiss-af3-expression-terms:DefinedConst" value="NoVal"/>
+          </specifications>
+          <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos" x="840" y="48"/>
+          <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="108" height="72"/>
+          <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="cpos"/>
+          <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="cdim" width="0" height="0"/>
+          <layoutData xsi:type="org-fortiss-tooling-base-model-layout:OffsetOrientation" key="coffsetorient" offset="24" orientation="EAST"/>
+        </connectors>
+        <connectors xsi:type="org-fortiss-af3-component:InputPort" xmi:id="442" id="442" name="panelInIndicatorSignalA" comment="panelInIndicatorSignalA" incoming="452" outgoing="434">
+          <specifications xsi:type="org-fortiss-af3-component:PortSpecification" xmi:id="443" id="443">
+            <type xsi:type="org-fortiss-af3-expression-types:TDefinedType" name="IndicatorSignal" def="10"/>
+            <initialValue xsi:type="org-fortiss-af3-expression-terms:DefinedConst" value="NoVal"/>
+          </specifications>
+          <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos" x="840" y="84"/>
+          <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="108" height="72"/>
+          <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="cpos"/>
+          <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="cdim" width="0" height="0"/>
+          <layoutData xsi:type="org-fortiss-tooling-base-model-layout:OffsetOrientation" key="coffsetorient" offset="60" orientation="EAST"/>
+        </connectors>
+        <connectors xsi:type="org-fortiss-af3-component:InputPort" xmi:id="444" id="444" name="panelInPedestrianSignal" comment="panelInPedestrianSignal" incoming="451" outgoing="433">
+          <specifications xsi:type="org-fortiss-af3-component:PortSpecification" xmi:id="445" id="445">
+            <type xsi:type="org-fortiss-af3-expression-types:TDefinedType" name="PedestrianColor" def="13"/>
+            <initialValue xsi:type="org-fortiss-af3-expression-terms:DefinedConst" value="NoVal"/>
+          </specifications>
+          <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos" x="840" y="120"/>
+          <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="108" height="72"/>
+          <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="cpos"/>
+          <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="cdim" width="0" height="0"/>
+          <layoutData xsi:type="org-fortiss-tooling-base-model-layout:OffsetOrientation" key="coffsetorient" offset="96" orientation="EAST"/>
+        </connectors>
+        <connectors xsi:type="org-fortiss-af3-component:InputPort" xmi:id="446" id="446" name="panelInTrafficSignal" comment="panelInTrafficSignal" incoming="450" outgoing="432">
+          <specifications xsi:type="org-fortiss-af3-component:PortSpecification" xmi:id="447" id="447">
+            <type xsi:type="org-fortiss-af3-expression-types:TDefinedType" name="TrafficColor" def="5"/>
+            <initialValue xsi:type="org-fortiss-af3-expression-terms:DefinedConst" value="NoVal"/>
+          </specifications>
+          <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos" x="840" y="156"/>
+          <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="108" height="72"/>
+          <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="cpos"/>
+          <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="cdim" width="0" height="0"/>
+          <layoutData xsi:type="org-fortiss-tooling-base-model-layout:OffsetOrientation" key="coffsetorient" offset="132" orientation="EAST"/>
+        </connectors>
+        <connectors xsi:type="org-fortiss-af3-component:OutputPort" xmi:id="448" id="448" name="panelOutButtonB" comment="panelOutButtonB" incoming="431" outgoing="195">
+          <specifications xsi:type="org-fortiss-af3-component:PortSpecification" xmi:id="449" id="449">
+            <type xsi:type="org-fortiss-af3-expression-types:TDefinedType" name="Signal" def="16"/>
+            <initialValue xsi:type="org-fortiss-af3-expression-terms:DefinedConst" value="NoVal"/>
+          </specifications>
+          <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos" x="24" y="48"/>
+          <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="108" height="72"/>
+          <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="cpos"/>
+          <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="cdim" width="0" height="0"/>
+          <layoutData xsi:type="org-fortiss-tooling-base-model-layout:OffsetOrientation" key="coffsetorient" offset="24" orientation="WEST"/>
+        </connectors>
+        <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos" x="336" y="408"/>
+        <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="216" height="180"/>
+      </containedElements>
+      <specifications xsi:type="org-fortiss-af3-component:CausalityComponentSpecification" xmi:id="192" id="192"/>
+      <specifications xsi:type="org-fortiss-af3-component:VerifBehaviourComponentSpecification" xmi:id="193" id="193"/>
+      <connections xsi:type="org-fortiss-af3-component:Channel" xmi:id="194" id="194" name="buttonA" comment="buttonA" source="201" target="57">
+        <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Points" key="points"/>
+      </connections>
+      <connections xsi:type="org-fortiss-af3-component:Channel" xmi:id="195" id="195" name="buttonB" comment="buttonB" source="448" target="59">
+        <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Points" key="points">
+          <points x="36" y="444"/>
+          <points x="36" y="132"/>
+        </layoutData>
+      </connections>
+      <connections xsi:type="org-fortiss-af3-component:Channel" xmi:id="196" id="196" name="request" comment="request" source="61" target="182">
+        <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Points" key="points"/>
+      </connections>
+      <connections xsi:type="org-fortiss-af3-component:Channel" xmi:id="197" id="197" name="trafficSignal" comment="trafficSignal" source="184" target="205">
+        <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Points" key="points"/>
+      </connections>
+      <connections xsi:type="org-fortiss-af3-component:Channel" xmi:id="198" id="198" name="pedestrianSignal" comment="pedestrianSignal" source="186" target="207">
+        <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Points" key="points"/>
+      </connections>
+      <connections xsi:type="org-fortiss-af3-component:Channel" xmi:id="199" id="199" name="indicatorSignalA" comment="indicatorSignalA" source="188" target="209">
+        <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Points" key="points"/>
+      </connections>
+      <connections xsi:type="org-fortiss-af3-component:Channel" xmi:id="200" id="200" name="indicatorSignalB" comment="indicatorSignalB" source="190" target="211">
+        <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Points" key="points"/>
+      </connections>
+      <connections xsi:type="org-fortiss-af3-component:Channel" xmi:id="450" id="450" name="trafficSignal" comment="trafficSignal" source="184" target="446">
+        <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Points" key="points">
+          <points x="768" y="96"/>
+          <points x="996" y="96"/>
+          <points x="996" y="552"/>
+        </layoutData>
+      </connections>
+      <connections xsi:type="org-fortiss-af3-component:Channel" xmi:id="451" id="451" name="pedestrianSignal" comment="pedestrianSignal" source="186" target="444">
+        <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Points" key="points">
+          <points x="768" y="192"/>
+          <points x="972" y="192"/>
+          <points x="972" y="516"/>
+        </layoutData>
+      </connections>
+      <connections xsi:type="org-fortiss-af3-component:Channel" xmi:id="452" id="452" name="indicatorSignalA" comment="indicatorSignalA" source="188" target="442">
+        <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Points" key="points">
+          <points x="768" y="288"/>
+          <points x="948" y="288"/>
+          <points x="948" y="480"/>
+        </layoutData>
+      </connections>
+      <connections xsi:type="org-fortiss-af3-component:Channel" xmi:id="453" id="453" name="indicatorSignalB" comment="indicatorSignalB" source="190" target="440">
+        <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Points" key="points">
+          <points x="768" y="384"/>
+          <points x="924" y="384"/>
+          <points x="924" y="444"/>
+        </layoutData>
+      </connections>
+      <connectors xsi:type="org-fortiss-af3-component:InputPort" xmi:id="201" id="201" name="tlarchInButtonA" comment="tlarchInButtonA" outgoing="194">
+        <specifications xsi:type="org-fortiss-af3-component:PortSpecification" xmi:id="202" id="202">
+          <type xsi:type="org-fortiss-af3-expression-types:TDefinedType" name="Signal" def="16"/>
+          <initialValue xsi:type="org-fortiss-af3-expression-terms:DefinedConst" value="NoVal"/>
+        </specifications>
+        <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos" x="24" y="48"/>
+        <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="108" height="72"/>
+        <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="cpos"/>
+        <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="cdim" width="0" height="0"/>
+      </connectors>
+      <connectors xsi:type="org-fortiss-af3-component:OutputPort" xmi:id="205" id="205" name="tlarchOutTrafficSignal" comment="tlarchOutTrafficSignal" incoming="197">
+        <specifications xsi:type="org-fortiss-af3-component:PortSpecification" xmi:id="206" id="206">
+          <type xsi:type="org-fortiss-af3-expression-types:TDefinedType" name="TrafficColor" def="5"/>
+          <initialValue xsi:type="org-fortiss-af3-expression-terms:DefinedConst" value="NoVal"/>
+        </specifications>
+        <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos" x="840" y="48"/>
+        <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="108" height="72"/>
+        <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="cpos"/>
+        <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="cdim" width="0" height="0"/>
+      </connectors>
+      <connectors xsi:type="org-fortiss-af3-component:OutputPort" xmi:id="207" id="207" name="tlarchOutPedestrianSignal" comment="tlarchOutPedestrianSignal" incoming="198">
+        <specifications xsi:type="org-fortiss-af3-component:PortSpecification" xmi:id="208" id="208">
+          <type xsi:type="org-fortiss-af3-expression-types:TDefinedType" name="PedestrianColor" def="13"/>
+          <initialValue xsi:type="org-fortiss-af3-expression-terms:DefinedConst" value="NoVal"/>
+        </specifications>
+        <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos" x="840" y="144"/>
+        <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="108" height="72"/>
+        <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="cpos"/>
+        <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="cdim" width="0" height="0"/>
+      </connectors>
+      <connectors xsi:type="org-fortiss-af3-component:OutputPort" xmi:id="209" id="209" name="tlarchOutIndicatorSignalA" comment="tlarchOutIndicatorSignalA" incoming="199">
+        <specifications xsi:type="org-fortiss-af3-component:PortSpecification" xmi:id="210" id="210">
+          <type xsi:type="org-fortiss-af3-expression-types:TDefinedType" name="IndicatorSignal" def="10"/>
+          <initialValue xsi:type="org-fortiss-af3-expression-terms:DefinedConst" value="NoVal"/>
+        </specifications>
+        <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos" x="840" y="240"/>
+        <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="108" height="72"/>
+        <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="cpos"/>
+        <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="cdim" width="0" height="0"/>
+      </connectors>
+      <connectors xsi:type="org-fortiss-af3-component:OutputPort" xmi:id="211" id="211" name="tlarchOutIndicatorSignalB" comment="tlarchOutIndicatorSignalB" incoming="200">
+        <specifications xsi:type="org-fortiss-af3-component:PortSpecification" xmi:id="212" id="212">
+          <type xsi:type="org-fortiss-af3-expression-types:TDefinedType" name="IndicatorSignal" def="10"/>
+          <initialValue xsi:type="org-fortiss-af3-expression-terms:DefinedConst" value="NoVal"/>
+        </specifications>
+        <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos" x="840" y="336"/>
+        <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="108" height="72"/>
+        <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="cpos"/>
+        <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="cdim" width="0" height="0"/>
+      </connectors>
+      <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos"/>
+      <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="108" height="72"/>
+    </containedElements>
+  </rootElements>
+  <rootElements xsi:type="org-fortiss-af3-project-execution:ExecutionConfigurationStore" xmi:id="213" id="213">
+    <configurations xmi:id="214" id="214" name="TrafficLights Execution Configuration" comment="" idReference="24"/>
+  </rootElements>
+  <rootElements xsi:type="org-fortiss-af3-mira:Analysis" xmi:id="215" id="215" name="TL-Requirements">
+    <containedElements xsi:type="org-fortiss-af3-mira-glossary:Glossary" xmi:id="216" id="216" name="Glossary" comment="">
+      <containedElements xsi:type="org-fortiss-af3-mira-glossary:GlossaryEntry" xmi:id="217" id="217" name="Traffic" comment="" definition="All vehicles and persons moving on or next to the street."/>
+      <containedElements xsi:type="org-fortiss-af3-mira-glossary:GlossaryEntry" xmi:id="218" id="218" name="Controller" comment="" definition="The Traffic Light Controller controls a traffic light system, which consists of a Pedestrian Light for the pedestrians and a traffic light for the motor vehicle."/>
+    </containedElements>
+    <containedElements xsi:type="org-fortiss-af3-mira-requirementSource:RequirementSource" xmi:id="219" id="219" name="Requirement Sources" comment="">
+      <containedElements xsi:type="org-fortiss-af3-mira-requirementSource:RequirementDocument" xmi:id="220" id="220" name="ISO 26262 standard" comment="First 3 parts of ISO 26262 added, more parts exist." definition="ISO 26262 Road vehicles - Functional safety, 2011.">
+        <containedElements xsi:type="org-fortiss-af3-mira-requirementSource:FileItem" xmi:id="221" id="221" name="http://www.iso.org/iso/home/store/catalogue_tc/catalogue_detail.htm?csnumber=43464" uri="http://www.iso.org/iso/home/store/catalogue_tc/catalogue_detail.htm?csnumber=43464" version="2011" description="ISO 26262-1:2011: Part 1: Vocabulary"/>
+        <containedElements xsi:type="org-fortiss-af3-mira-requirementSource:FileItem" xmi:id="222" id="222" name="http://www.iso.org/iso/home/store/catalogue_tc/catalogue_detail.htm?csnumber=51356" uri="http://www.iso.org/iso/home/store/catalogue_tc/catalogue_detail.htm?csnumber=51356" version="2011" description="ISO 26262-2:2011: Part 2: Management of functional safety"/>
+        <containedElements xsi:type="org-fortiss-af3-mira-requirementSource:FileItem" xmi:id="223" id="223" name="http://www.iso.org/iso/home/store/catalogue_tc/catalogue_detail.htm?csnumber=51358" uri="http://www.iso.org/iso/home/store/catalogue_tc/catalogue_detail.htm?csnumber=51358" version="2011" description="ISO 26262-3:2011: Part 3: Concept phase"/>
+      </containedElements>
+      <containedElements xsi:type="org-fortiss-af3-mira-requirementSource:Stakeholder" xmi:id="224" id="224" name="System architect" comment="" definition="System architect of the traffic light controller.">
+        <containedElements xsi:type="org-fortiss-af3-mira-requirementSource:Person" xmi:id="225" id="225" name="Christopher Pike" eMailAddress="Pike@uss.org" telephoneNr="+123456789"/>
+      </containedElements>
+      <containedElements xsi:type="org-fortiss-af3-mira-requirementSource:Stakeholder" xmi:id="226" id="226" name="Pedestrian" comment="" definition="A pedestrian is a person traveling on foot, whether walking or running. In some communities, those traveling using tiny wheels such as roller skates, skateboards, and scooters, as well as wheelchair users are also included as pedestrians. In modern times, the term mostly refers to someone walking on a road or sidewalk, but this was not the case historically (http://en.wikipedia.org/wiki/Pedestrian, last accessed: 05/29/2013).">
+        <synonyms text="Walker"/>
+      </containedElements>
+      <containedElements xsi:type="org-fortiss-af3-mira-requirementSource:ExternalSystem" xmi:id="227" id="227" name="Traffic light" comment="" definition="Traffic lights are signalling devices positioned at or near road intersections, pedestrian crossings and other locations to control competing flows of traffic."/>
+      <containedElements xsi:type="org-fortiss-af3-mira-requirementSource:ExternalSystem" xmi:id="228" id="228" name="Pedestrian light" comment="" definition="The pedestrian light indicates whether pedestrians are allowed to cross the street."/>
+      <containedElements xsi:type="org-fortiss-af3-mira-requirementSource:ExternalSystem" xmi:id="229" id="229" name="Indicator" comment="" definition="An actuation indicator is a light, a tone, a voice message, or a combination of audible and visual indicators that informs pedestrians that the button has been pressed and that their desire to cross has been communicated to the controller."/>
+    </containedElements>
+    <containedElements xsi:type="org-fortiss-af3-mira:RequirementsContainer" xmi:id="230" id="230" name="Requirements" comment="">
+      <containedElements xsi:type="org-fortiss-af3-mira:RequirementsPackage" xmi:id="231" id="231" name="Requirements Package" comment="">
+        <containedElements xsi:type="org-fortiss-af3-mira:Requirement" xmi:id="232" id="232" name="Traffic light timing constraint" description="The traffic light should always be at least two minutes green before switching to red again." rationale="Traffic has to move on." author="Sabine" sources="System architect Christopher Pike" status="Analyzed" priority="Normal - Satisfier" reqId="2" incomingRequirementRelation="335">
+          <specifications xsi:type="org-fortiss-af3-mira-verification:CheckList" xmi:id="233" id="233" name="Discovery Phase" comment="Check list for discovery Phase">
+            <items xmi:id="234" id="234" name="Requirement is relevant" comment="TODO" category="E3.1"/>
+            <items xmi:id="235" id="235" name="Requirement description is correct" comment="TODO" category="E4.1"/>
+            <items xmi:id="236" id="236" name="Consistent wording -- check with glossary" comment="TODO" category="E6.1"/>
+          </specifications>
+          <specifications xsi:type="org-fortiss-af3-mira-verification:CheckList" xmi:id="237" id="237" name="Detailed Modeling Phase" comment="Check list for conceptual modeling phase">
+            <items xmi:id="238" id="238" name="Consistent wording -- check with glossary" comment="TODO" category="E6.1"/>
+          </specifications>
+          <specifications xsi:type="org-fortiss-af3-safety-annotation:SafetyIntegrityLevel" xmi:id="454" id="454"/>
+          <connectors xsi:type="org-fortiss-af3-mira:RequirementConnector"/>
+        </containedElements>
+        <containedElements xsi:type="org-fortiss-af3-mira:Requirement" xmi:id="239" id="239" name="Pedestrian light timing constraint" description="The pedestrian should wait no more than two minutes before pedestrian light switching to 'go'." rationale="Traffic has to move." author="Sabine" sources="System architect Christopher Pike" status="In Analysis" priority="Normal - Satisfier" todo="Two minutes limit is not yet confirmed due to an conflict." reqId="3" incomingRequirementRelation="335 336">
+          <specifications xsi:type="org-fortiss-af3-mira-verification:CheckList" xmi:id="240" id="240" name="Discovery Phase" comment="Check list for discovery Phase">
+            <items xmi:id="241" id="241" name="Requirement is relevant" comment="TODO" category="E3.1"/>
+            <items xmi:id="242" id="242" name="Requirement description is correct" comment="TODO" category="E4.1"/>
+            <items xmi:id="243" id="243" name="Consistent wording -- check with glossary" comment="TODO" category="E6.1"/>
+          </specifications>
+          <specifications xsi:type="org-fortiss-af3-mira-verification:CheckList" xmi:id="244" id="244" name="Detailed Modeling Phase" comment="Check list for conceptual modeling phase">
+            <items xmi:id="245" id="245" name="Consistent wording -- check with glossary" comment="TODO" category="E6.1"/>
+          </specifications>
+          <specifications xsi:type="org-fortiss-af3-safety-annotation:SafetyIntegrityLevel" xmi:id="455" id="455"/>
+          <connectors xsi:type="org-fortiss-af3-mira:RequirementConnector"/>
+        </containedElements>
+      </containedElements>
+      <containedElements xsi:type="org-fortiss-af3-mira:RequirementsPackage" xmi:id="246" id="246" name="Use Cases Package" comment="">
+        <containedElements xsi:type="org-fortiss-af3-mira-usecase:UseCase" xmi:id="247" id="247" name="Activate pedestrian light" comment="Here you have place to write some comment." referencedBy="161 164 77 165 168 171 174 96" description="Pedestrian activates the traffic light controller. Traffic light and pedestrian light are changed, so that the pedestrian can cross the street. The indicator shows the actual state of the requestt." rationale="The pedestrian wants to cross the street." author="Sabine" sources="System architect Christopher Pike" status="Analyzed" todo="Timing constraints (waiting times) are not yet refined." reqId="1" outgoingRequirementRelation="336">
+          <containedElements xsi:type="org-fortiss-af3-mira-usecase:Scenario" xmi:id="248" id="248" name="Activate traffic light to 'red' and pedestrian light to 'go'" comment="" successScenario="true">
+            <containedElements xsi:type="org-fortiss-af3-mira-usecase:ScenarioStep" actor="325" action="Pedestrian activates the traffic light controller by pushing button A or B." actionType="Input"/>
+            <containedElements xsi:type="org-fortiss-af3-mira-usecase:ScenarioStep" actor="328" action="Light on indicator goes on." actionType="Output"/>
+            <containedElements xsi:type="org-fortiss-af3-mira-usecase:ScenarioStep" actor="327" action="Controller switches traffic light to 'yellow'." actionType="Output" branch="//@rootElements.4/@containedElements.2/@containedElements.1/@containedElements.0/@containedElements.1/@containedElements.0"/>
+            <containedElements xsi:type="org-fortiss-af3-mira-usecase:ScenarioStep" actor="327" action="Controller switches traffic light to 'red'." actionType="Output" branch="//@rootElements.4/@containedElements.2/@containedElements.1/@containedElements.0/@containedElements.1/@containedElements.0"/>
+            <containedElements xsi:type="org-fortiss-af3-mira-usecase:ScenarioStep" actor="326" action="Controller switches pedestrian light to 'go'." actionType="Output" branch="//@rootElements.4/@containedElements.2/@containedElements.1/@containedElements.0/@containedElements.1/@containedElements.0"/>
+            <containedElements xsi:type="org-fortiss-af3-mira-usecase:ScenarioStep" actor="328" action="Light on indicator goes off." actionType="Output" branch="//@rootElements.4/@containedElements.2/@containedElements.1/@containedElements.0/@containedElements.1/@containedElements.0"/>
+          </containedElements>
+          <containedElements xsi:type="org-fortiss-af3-mira-usecase:Scenario" xmi:id="249" id="249" name="Failure scenario" comment="">
+            <containedElements xsi:type="org-fortiss-af3-mira-usecase:ScenarioStep" actor="327" action="Controller switches traffic lights to red." actionType="Output"/>
+            <containedElements xsi:type="org-fortiss-af3-mira-usecase:ScenarioStep" actor="326" action="Controller switches pedestrian light to 'no go'." actionType="Output"/>
+          </containedElements>
+          <containedElements xsi:type="org-fortiss-af3-msc:MSCSpecification" xmi:id="250" id="250" name="">
+            <topEntity xmi:id="251" id="251" name="Success scenario as MSC" comment="">
+              <containedElements xsi:type="org-fortiss-af3-msc:MSCObject" xmi:id="252" id="252" name="Pedestrian" comment="">
+                <specifications xsi:type="org-fortiss-af3-msc:MSCObjectSpecification" xmi:id="253" id="253">
+                  <modelElementReference xsi:type="org-fortiss-af3-msc:ComponentReference"/>
+                </specifications>
+                <connectors xsi:type="org-fortiss-af3-msc:MessageExitConnector" xmi:id="254" id="254" name="" comment="" outgoing="299">
+                  <specifications xsi:type="org-fortiss-af3-msc:MSCTimeSpecification" xmi:id="255" id="255"/>
+                  <specifications xsi:type="org-fortiss-af3-msc:MSCPortSpecification" xmi:id="256" id="256">
+                    <modelElementReference xsi:type="org-fortiss-af3-msc:ComponentReference"/>
+                  </specifications>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:OffsetOrientation" key="coffsetorient" orientation="WEST"/>
+                </connectors>
+                <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos" x="48" y="24"/>
+                <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="108" height="360"/>
+              </containedElements>
+              <containedElements xsi:type="org-fortiss-af3-msc:MSCObject" xmi:id="257" id="257" name="Traffic light controller" comment="">
+                <specifications xsi:type="org-fortiss-af3-msc:MSCObjectSpecification" xmi:id="258" id="258">
+                  <modelElementReference xsi:type="org-fortiss-af3-msc:ComponentReference"/>
+                </specifications>
+                <connectors xsi:type="org-fortiss-af3-msc:MessageEntryConnector" xmi:id="259" id="259" name="" comment="" incoming="299">
+                  <specifications xsi:type="org-fortiss-af3-msc:MSCTimeSpecification" xmi:id="260" id="260"/>
+                  <specifications xsi:type="org-fortiss-af3-msc:MSCPortSpecification" xmi:id="261" id="261">
+                    <modelElementReference xsi:type="org-fortiss-af3-msc:ComponentReference"/>
+                  </specifications>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:OffsetOrientation" key="coffsetorient" orientation="WEST"/>
+                </connectors>
+                <connectors xsi:type="org-fortiss-af3-msc:MessageExitConnector" xmi:id="262" id="262" name="" comment="" outgoing="301">
+                  <specifications xsi:type="org-fortiss-af3-msc:MSCTimeSpecification" xmi:id="263" id="263"/>
+                  <specifications xsi:type="org-fortiss-af3-msc:MSCPortSpecification" xmi:id="264" id="264">
+                    <modelElementReference xsi:type="org-fortiss-af3-msc:ComponentReference"/>
+                  </specifications>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:OffsetOrientation" key="coffsetorient" offset="24" orientation="WEST"/>
+                </connectors>
+                <connectors xsi:type="org-fortiss-af3-msc:MessageExitConnector" xmi:id="265" id="265" name="" comment="" outgoing="303">
+                  <specifications xsi:type="org-fortiss-af3-msc:MSCTimeSpecification" xmi:id="266" id="266"/>
+                  <specifications xsi:type="org-fortiss-af3-msc:MSCPortSpecification" xmi:id="267" id="267">
+                    <modelElementReference xsi:type="org-fortiss-af3-msc:ComponentReference"/>
+                  </specifications>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:OffsetOrientation" key="coffsetorient" offset="48" orientation="WEST"/>
+                </connectors>
+                <connectors xsi:type="org-fortiss-af3-msc:MessageExitConnector" xmi:id="268" id="268" name="" comment="" outgoing="305">
+                  <specifications xsi:type="org-fortiss-af3-msc:MSCTimeSpecification" xmi:id="269" id="269"/>
+                  <specifications xsi:type="org-fortiss-af3-msc:MSCPortSpecification" xmi:id="270" id="270">
+                    <modelElementReference xsi:type="org-fortiss-af3-msc:ComponentReference"/>
+                  </specifications>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:OffsetOrientation" key="coffsetorient" offset="72" orientation="WEST"/>
+                </connectors>
+                <connectors xsi:type="org-fortiss-af3-msc:MessageExitConnector" xmi:id="271" id="271" name="" comment="" outgoing="307">
+                  <specifications xsi:type="org-fortiss-af3-msc:MSCTimeSpecification" xmi:id="272" id="272"/>
+                  <specifications xsi:type="org-fortiss-af3-msc:MSCPortSpecification" xmi:id="273" id="273">
+                    <modelElementReference xsi:type="org-fortiss-af3-msc:ComponentReference"/>
+                  </specifications>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:OffsetOrientation" key="coffsetorient" offset="96" orientation="WEST"/>
+                </connectors>
+                <connectors xsi:type="org-fortiss-af3-msc:MessageExitConnector" xmi:id="274" id="274" name="" comment="" outgoing="309">
+                  <specifications xsi:type="org-fortiss-af3-msc:MSCTimeSpecification" xmi:id="275" id="275"/>
+                  <specifications xsi:type="org-fortiss-af3-msc:MSCPortSpecification" xmi:id="276" id="276">
+                    <modelElementReference xsi:type="org-fortiss-af3-msc:ComponentReference"/>
+                  </specifications>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:OffsetOrientation" key="coffsetorient" offset="120" orientation="WEST"/>
+                </connectors>
+                <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos" x="204" y="24"/>
+                <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="180" height="360"/>
+              </containedElements>
+              <containedElements xsi:type="org-fortiss-af3-msc:MSCObject" xmi:id="277" id="277" name="Indicator" comment="">
+                <specifications xsi:type="org-fortiss-af3-msc:MSCObjectSpecification" xmi:id="278" id="278">
+                  <modelElementReference xsi:type="org-fortiss-af3-msc:ComponentReference"/>
+                </specifications>
+                <connectors xsi:type="org-fortiss-af3-msc:MessageEntryConnector" xmi:id="279" id="279" name="" comment="" incoming="301">
+                  <specifications xsi:type="org-fortiss-af3-msc:MSCTimeSpecification" xmi:id="280" id="280"/>
+                  <specifications xsi:type="org-fortiss-af3-msc:MSCPortSpecification" xmi:id="281" id="281">
+                    <modelElementReference xsi:type="org-fortiss-af3-msc:ComponentReference"/>
+                  </specifications>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:OffsetOrientation" key="coffsetorient" offset="24" orientation="WEST"/>
+                </connectors>
+                <connectors xsi:type="org-fortiss-af3-msc:MessageEntryConnector" xmi:id="282" id="282" name="" comment="" incoming="309">
+                  <specifications xsi:type="org-fortiss-af3-msc:MSCTimeSpecification" xmi:id="283" id="283"/>
+                  <specifications xsi:type="org-fortiss-af3-msc:MSCPortSpecification" xmi:id="284" id="284">
+                    <modelElementReference xsi:type="org-fortiss-af3-msc:ComponentReference"/>
+                  </specifications>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:OffsetOrientation" key="coffsetorient" offset="120" orientation="WEST"/>
+                </connectors>
+                <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos" x="432" y="24"/>
+                <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="108" height="360"/>
+              </containedElements>
+              <containedElements xsi:type="org-fortiss-af3-msc:MSCObject" xmi:id="285" id="285" name="Traffic light" comment="">
+                <specifications xsi:type="org-fortiss-af3-msc:MSCObjectSpecification" xmi:id="286" id="286">
+                  <modelElementReference xsi:type="org-fortiss-af3-msc:ComponentReference"/>
+                </specifications>
+                <connectors xsi:type="org-fortiss-af3-msc:MessageEntryConnector" xmi:id="287" id="287" name="" comment="" incoming="303">
+                  <specifications xsi:type="org-fortiss-af3-msc:MSCTimeSpecification" xmi:id="288" id="288"/>
+                  <specifications xsi:type="org-fortiss-af3-msc:MSCPortSpecification" xmi:id="289" id="289">
+                    <modelElementReference xsi:type="org-fortiss-af3-msc:ComponentReference"/>
+                  </specifications>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:OffsetOrientation" key="coffsetorient" offset="48" orientation="WEST"/>
+                </connectors>
+                <connectors xsi:type="org-fortiss-af3-msc:MessageEntryConnector" xmi:id="290" id="290" name="" comment="" incoming="305">
+                  <specifications xsi:type="org-fortiss-af3-msc:MSCTimeSpecification" xmi:id="291" id="291"/>
+                  <specifications xsi:type="org-fortiss-af3-msc:MSCPortSpecification" xmi:id="292" id="292">
+                    <modelElementReference xsi:type="org-fortiss-af3-msc:ComponentReference"/>
+                  </specifications>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:OffsetOrientation" key="coffsetorient" offset="72" orientation="WEST"/>
+                </connectors>
+                <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos" x="588" y="24"/>
+                <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="120" height="360"/>
+              </containedElements>
+              <containedElements xsi:type="org-fortiss-af3-msc:MSCObject" xmi:id="293" id="293" name="Pedestrian light" comment="">
+                <specifications xsi:type="org-fortiss-af3-msc:MSCObjectSpecification" xmi:id="294" id="294">
+                  <modelElementReference xsi:type="org-fortiss-af3-msc:ComponentReference"/>
+                </specifications>
+                <connectors xsi:type="org-fortiss-af3-msc:MessageEntryConnector" xmi:id="295" id="295" name="" comment="" incoming="307">
+                  <specifications xsi:type="org-fortiss-af3-msc:MSCTimeSpecification" xmi:id="296" id="296"/>
+                  <specifications xsi:type="org-fortiss-af3-msc:MSCPortSpecification" xmi:id="297" id="297">
+                    <modelElementReference xsi:type="org-fortiss-af3-msc:ComponentReference"/>
+                  </specifications>
+                  <layoutData xsi:type="org-fortiss-tooling-base-model-layout:OffsetOrientation" key="coffsetorient" offset="96" orientation="WEST"/>
+                </connectors>
+                <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Point" key="pos" x="756" y="24"/>
+                <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Dimension" key="dim" width="144" height="360"/>
+              </containedElements>
+              <specifications xsi:type="org-fortiss-af3-msc:MSCObjectSpecification" xmi:id="298" id="298">
+                <modelElementReference xsi:type="org-fortiss-af3-msc:ComponentReference"/>
+              </specifications>
+              <connections xsi:type="org-fortiss-af3-msc:Message" xmi:id="299" id="299" name="activates" comment="" source="254" target="259">
+                <specifications xsi:type="org-fortiss-af3-msc:MessageSpecification" xmi:id="300" id="300"/>
+                <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Points" key="points"/>
+              </connections>
+              <connections xsi:type="org-fortiss-af3-msc:Message" xmi:id="301" id="301" name="activate" comment="" source="262" target="279">
+                <specifications xsi:type="org-fortiss-af3-msc:MessageSpecification" xmi:id="302" id="302"/>
+                <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Points" key="points"/>
+              </connections>
+              <connections xsi:type="org-fortiss-af3-msc:Message" xmi:id="303" id="303" name="switch to 'yellow'" comment="" source="265" target="287">
+                <specifications xsi:type="org-fortiss-af3-msc:MessageSpecification" xmi:id="304" id="304"/>
+                <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Points" key="points"/>
+              </connections>
+              <connections xsi:type="org-fortiss-af3-msc:Message" xmi:id="305" id="305" name="switch to 'red'" comment="" source="268" target="290">
+                <specifications xsi:type="org-fortiss-af3-msc:MessageSpecification" xmi:id="306" id="306"/>
+                <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Points" key="points"/>
+              </connections>
+              <connections xsi:type="org-fortiss-af3-msc:Message" xmi:id="307" id="307" name="switch to 'go'" comment="" source="271" target="295">
+                <specifications xsi:type="org-fortiss-af3-msc:MessageSpecification" xmi:id="308" id="308"/>
+                <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Points" key="points"/>
+              </connections>
+              <connections xsi:type="org-fortiss-af3-msc:Message" xmi:id="309" id="309" name="deactivate" comment="" source="274" target="282">
+                <specifications xsi:type="org-fortiss-af3-msc:MessageSpecification" xmi:id="310" id="310"/>
+                <layoutData xsi:type="org-fortiss-tooling-base-model-layout:Points" key="points"/>
+              </connections>
+            </topEntity>
+          </containedElements>
+          <specifications xsi:type="org-fortiss-af3-mira-verification:CheckList" xmi:id="311" id="311" name="Discovery Phase" comment="Check list for discovery Phase">
+            <items xmi:id="312" id="312" name="Use Case is relevant" comment="TODO" category="E3.1"/>
+            <items xmi:id="313" id="313" name="Use Case description is correct" comment="TODO" category="E4.1"/>
+            <items xmi:id="314" id="314" name="Actors are complete" comment="TODO" category="E1.2"/>
+            <items xmi:id="315" id="315" name="Associations to actors are correct" comment="TODO" category="E4.2"/>
+            <items xmi:id="316" id="316" name="Consistent wording -- check with glossary" comment="TODO" category="E6.1"/>
+          </specifications>
+          <specifications xsi:type="org-fortiss-af3-mira-verification:CheckList" xmi:id="317" id="317" name="Detailed Modeling Phase" comment="Check list for conceptual modeling phase">
+            <items xmi:id="318" id="318" name="Alternative scenarios are complete--experts view" comment="TODO" category="E1.6"/>
+            <items xmi:id="319" id="319" name="All alternative scenarios of the Use Case are described" comment="TODO" category="E1.7"/>
+            <items xmi:id="320" id="320" name="Completeness of course of actions" comment="TODO" category="E1.9"/>
+            <items xmi:id="321" id="321" name="Alternative scenarios are consistently described" comment="TODO" category="E1.10"/>
+            <items xmi:id="322" id="322" name="Consistent wording -- check with glossary" comment="TODO" category="E6.1"/>
+          </specifications>
+          <specifications xsi:type="org-fortiss-af3-safety-annotation:SafetyIntegrityLevel" xmi:id="456" id="456"/>
+          <connectors xsi:type="org-fortiss-af3-mira:RequirementConnector"/>
+          <scope xmi:id="323" id="323" name="Traffic light controller"/>
+          <actor xmi:id="324" id="324" name="&lt;no actor>" comment="dummy actor"/>
+          <actor xmi:id="325" id="325" name="Pedestrian" comment=""/>
+          <actor xmi:id="326" id="326" name="Pedestrian light" comment=""/>
+          <actor xmi:id="327" id="327" name="Traffic light" comment=""/>
+          <actor xmi:id="328" id="328" name="Indicator" comment=""/>
+          <trigger xmi:id="329" id="329" name="Pedestrian activates the traffic light controller by a request."/>
+          <precondition xsi:type="org-fortiss-af3-mira-usecase:ConditionBase" xmi:id="330" id="330" name="None"/>
+          <minimalGuarantee xsi:type="org-fortiss-af3-mira-usecase:ConditionBase" xmi:id="331" id="331" name="Traffic light is 'green' and pedestrian light is 'no go'"/>
+          <successGuarantee xsi:type="org-fortiss-af3-mira-usecase:ConditionBase" xmi:id="332" id="332" name="Traffic light is 'red' and pedestrian light is 'go' and indicator is deactivated"/>
+          <inputs xmi:id="333" id="333" name="Request of pedestrian"/>
+          <outputs xmi:id="334" id="334" name="Signal to traffic light and pedestrian light"/>
+        </containedElements>
+      </containedElements>
+    </containedElements>
+    <requirementRelation xmi:id="335" id="335" targetRequirement="232 239" requirementRelationStatus="337">
+      <requirementRelationType xsi:type="org-fortiss-af3-mira-relations:ConflictedRequirementRelationType"/>
+    </requirementRelation>
+    <requirementRelation xmi:id="336" id="336" sourceRequirement="247" targetRequirement="239" requirementRelationStatus="337">
+      <requirementRelationType xsi:type="org-fortiss-af3-mira-relations:RefinementRequirementRelationType"/>
+    </requirementRelation>
+    <requirementRelationStatus xmi:id="337" id="337" name="New" comment=""/>
+    <requirementRelationStatus xmi:id="338" id="338" name="In Analysis" comment=""/>
+    <requirementRelationStatus xmi:id="339" id="339" name="Analyzed" comment=""/>
+  </rootElements>
+</org-fortiss-af3-project:FileProject>
